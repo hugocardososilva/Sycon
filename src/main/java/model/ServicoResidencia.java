@@ -2,17 +2,17 @@ package model;
 
 public class ServicoResidencia extends Servico {
 	
-	private Frequente frequente;
+	private Pessoa frequente;
 	
 	public ServicoResidencia() {
 		super();
 	}
 
-	public Frequente getFrequente() {
+	public Pessoa getFrequente() {
 		return frequente;
 	}
 
-	public void setFrequente(Frequente frequente) {
+	public void setFrequente(Pessoa frequente) {
 		this.frequente = frequente;
 	}
 	

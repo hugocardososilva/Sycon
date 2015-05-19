@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Frequente extends Prestador{
+public class Pessoa extends Prestador{
 	
 	private String nome;
 	private String sobrenome;
@@ -21,7 +21,7 @@ public class Frequente extends Prestador{
 	private Lote lote;
 	
 	
-	public Frequente() {
+	public Pessoa() {
 		super();
 		this.servicos= new ArrayList<Servico>();
 	}

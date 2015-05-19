@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Esporadico extends Prestador {
+public class PessoaEsporadica extends Prestador {
 	
 	private String nome;
 	private String sobrenome;
@@ -11,7 +11,7 @@ public class Esporadico extends Prestador {
 	
 	private Servico servico;
 	
-	public Esporadico() {
+	public PessoaEsporadica() {
 		super();
 		
 	}

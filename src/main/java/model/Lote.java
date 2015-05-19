@@ -11,14 +11,14 @@ public class Lote {
 	private Inquilino responsavel;
 	private List<Inquilino> moradores;
 	
-	private List<Frequente> frequentes;
+	private List<Pessoa> frequentes;
 	
 	private List<Servico> servicos;
 	
 	
 	public Lote() {
 		this.moradores= new ArrayList<Inquilino>();
-		this.frequentes= new ArrayList<Frequente>();
+		this.frequentes= new ArrayList<Pessoa>();
 		this.servicos= new ArrayList<Servico>();
 	}
 
@@ -73,20 +73,20 @@ public class Lote {
 	}
 
 
-	public List<Frequente> getFrequentes() {
+	public List<Pessoa> getFrequentes() {
 		return frequentes;
 	}
 
 
-	public void setFrequentes(List<Frequente> frequentes) {
+	public void setFrequentes(List<Pessoa> frequentes) {
 		this.frequentes = frequentes;
 	}
 	
-	public void addFrequente(Frequente f){
+	public void addFrequente(Pessoa f){
 		this.frequentes.add(f);
 		
 	}
-	public void removeFrequente(Frequente f){
+	public void removeFrequente(Pessoa f){
 		this.frequentes.remove(f);
 	}
 
