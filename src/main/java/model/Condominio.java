@@ -1,15 +1,20 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Condominio {
 	
 	private long id;
 	private int diasSemUtilizarSistema;
 	private int numeroMaximoMoradores;
 	private Informacao informacao;
+	private List<Telefone> telefones;
 	
 	
 	public Condominio() {
 		super();
+		this.telefones= new ArrayList<Telefone>();
 	}
 
 
@@ -20,6 +25,16 @@ public class Condominio {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
 	}
 
 
@@ -52,6 +67,12 @@ public class Condominio {
 		this.numeroMaximoMoradores = numeroMaximoMoradores;
 	}
 	
+	public void addTelefone(Telefone telefone){
+		this.telefones.add(telefone);
+	}
+	public void removeTelefone(Telefone telefone){
+		this.telefones.remove(telefone);
+	}
 	
 	
 

@@ -1,12 +1,11 @@
 package model;
 
-public class OcorrenciaPrestadorServico extends Ocorrencia {
+public class ServicoCondominio extends Servico{
 	
-	private Prestador prestador;
+	private Prestador prestador; 
 	
-	public OcorrenciaPrestadorServico() {
+	public ServicoCondominio() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Prestador getPrestador() {
@@ -18,5 +17,4 @@ public class OcorrenciaPrestadorServico extends Ocorrencia {
 	}
 	
 	
-
 }
