@@ -3,16 +3,36 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+@Entity
 public class Lote {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private long numero;
 	private String local;
 	
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Inquilino responsavel;
+	
+	@OneToMany(mappedBy="residencia",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Inquilino> moradores;
 	
+	@OneToMany(mappedBy="lote", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Pessoa> frequentes;
 	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OrderBy("horaEntrada DESC")
 	private List<Servico> servicos;
 	
 	

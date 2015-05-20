@@ -1,7 +1,14 @@
 package model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+
+@Entity
 public class Funcionario extends Usuario {
 	
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Informacao informacao;
 
 	public Funcionario() {

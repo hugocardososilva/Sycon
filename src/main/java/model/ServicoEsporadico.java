@@ -1,7 +1,13 @@
 package model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class ServicoEsporadico extends Servico{
-	
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Prestador prestador; 
 	
 	public ServicoEsporadico() {

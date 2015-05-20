@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+@Entity
 public class Pessoa extends Prestador{
 	
 	private String nome;
@@ -13,11 +20,14 @@ public class Pessoa extends Prestador{
 	private String orgaoExpeditor;
 	private String email;
 	private String foto;
+	
 	private String senha;
 	private boolean bloqueado;
+	@Temporal(TemporalType.DATE)
 	private Date ultimoAcesso;
 	private List<Servico> servicos;
 	
+	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Lote lote;
 	
 	

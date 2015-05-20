@@ -2,11 +2,27 @@ package model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Servico {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	@Temporal(TemporalType.DATE)
 	private Date dataEntrada;
+	@Temporal(TemporalType.DATE)
 	private Date horaEntrada;
+	@Temporal(TemporalType.DATE)
 	private Date dataSaida;
+	@Temporal(TemporalType.DATE)
 	private Date horaSaida;
 	private String observacoes;
 	private boolean concluido;

@@ -3,12 +3,35 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+@Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class Prestador {
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
+	
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Informacao informacao;
+	
+	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<TipoServico> tipos;
+	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Telefone> telefones;
+	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<OcorrenciaPrestadorServico> ocorrencias;
 //	private List<Servico> servicos;
 	
