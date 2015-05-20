@@ -67,7 +67,7 @@ public class DAOFacade {
 			Usuario u = daou.getByEmail(email);
 			System.out.println(u.toString());
 			daoo.close();
-				if(u.getSenha()!=senha){
+				if(!u.getSenha().equals(senha)){
 					return null;
 				}
 			return u;

@@ -30,7 +30,7 @@ public class DAO<T> implements DAOInterface<T>{
 	protected EntityManager getManager(){
 		if(manager==null){
 			EntityManagerFactory factory = 
-				Persistence.createEntityManagerFactory("syscon");
+				Persistence.createEntityManagerFactory("condominio");
 			manager = factory.createEntityManager();
 		}
 		return manager;
@@ -100,7 +100,7 @@ public class DAO<T> implements DAOInterface<T>{
 			manager.getTransaction().rollback();
 	}
 	public static Connection getConnection() throws SQLException{
-		return DriverManager.getConnection("jdbc:postgresql://localhost:5432/syscon","postgres", "12345");
+		return DriverManager.getConnection("jdbc:postgresql://localhost:5432/crpmn","postgres", "12345");
 		
 	}
 

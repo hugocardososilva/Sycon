@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+	<h:form>
+	<p:menu toggleable="true">
+		<p:submenu label="Cadastros">
+<!-- 		<c:catch> -->
+<!-- 		<c:when test="#{sessionScope.user.}"></c:when> -->
+<!-- 		</c:catch> -->
+			<p:menuitem value="Novo Inquilino" action="#{inquilinoMB.novoInquilino}"/>
+		
+		</p:submenu>
+	
+	</p:menu>
+	</h:form>
+</h:body>
+</html>
