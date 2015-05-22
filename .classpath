@@ -33,6 +33,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Condominio/WebContent/WEB-INF/lib/javax.faces-2.0.10.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

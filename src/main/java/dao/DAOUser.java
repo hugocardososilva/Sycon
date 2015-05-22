@@ -14,5 +14,13 @@ public class DAOUser extends DAO<Usuario> {
 		return (Usuario) q.getSingleResult();
 		
 	}
+	public Usuario getByLogin(String login){
+		
+		Query q= manager.createQuery("SELECT U from Usuario U where U.login like :login");
+		q.setParameter("login", login);
+		
+		return (Usuario) q.getSingleResult();
+		
+	}
 
 }

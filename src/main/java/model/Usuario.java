@@ -1,5 +1,9 @@
 package model;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -64,6 +68,15 @@ public abstract class Usuario {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+		try {
+			this.senha = this.convertPasswordToMD5(senha);
+		} catch (NoSuchAlgorithmException e) {
+		
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	public String getNome() {
 		return nome;
@@ -126,6 +139,12 @@ public abstract class Usuario {
 		this.telefones.remove(telefone);
 	}
 	
-	
+	 public static String convertPasswordToMD5(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	        MessageDigest md = MessageDigest.getInstance("MD5");
+	 
+	        BigInteger hash = new BigInteger(1, md.digest(password.getBytes("UTF-8")));
+	 
+	        return String.format("%32x", hash);
+	    }
 
 }

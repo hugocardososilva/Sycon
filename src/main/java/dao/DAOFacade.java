@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import model.Usuario;
@@ -35,6 +37,8 @@ public class DAOFacade {
 			daoo.begin();
 			daoo.merge(obj);
 			System.out.println("atualizou?");
+			commit();
+			daoo.close();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,6 +50,7 @@ public class DAOFacade {
 	
 	public void commit(){
 		daoo.commit();
+		
 		
 	}
 
@@ -59,12 +64,12 @@ public class DAOFacade {
 		this.daoo = daoo;
 	}
 	
-	public Usuario isValidLogin(String email, String senha){
+	public Usuario isValidLogin(String login, String senha){
 		DAOUser daou = new DAOUser();
 		daoo.open();
 		daoo.begin();
 		try {
-			Usuario u = daou.getByEmail(email);
+			Usuario u = daou.getByLogin(login);
 			System.out.println(u.toString());
 			daoo.close();
 				if(!u.getSenha().equals(senha)){
@@ -78,7 +83,9 @@ public class DAOFacade {
 		
 		
 		
+		
 	}
+
 	
 	
 	

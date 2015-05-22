@@ -8,10 +8,8 @@
 	<h:form>
 	<p:menu toggleable="true">
 		<p:submenu label="Cadastros">
-<!-- 		<c:catch> -->
-<!-- 		<c:when test="#{sessionScope.user.}"></c:when> -->
-<!-- 		</c:catch> -->
-			<p:menuitem value="Novo Inquilino" action="#{inquilinoMB.novoInquilino}"/>
+		
+			<p:menuitem value="Gerenciar Lotes" action="#{lotesMB.redirectLotes}" ajax="false"/>
 		
 		</p:submenu>
 	

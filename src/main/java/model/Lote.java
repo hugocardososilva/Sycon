@@ -19,8 +19,9 @@ public class Lote {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private long numero;
-	private String local;
+	
+	private Long numero;
+	private String quadra;
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Inquilino responsavel;
@@ -53,23 +54,25 @@ public class Lote {
 	}
 
 
-	public long getNumero() {
+	public Long getNumero() {
 		return numero;
 	}
 
 
-	public void setNumero(long numero) {
+	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
 
 
-	public String getLocal() {
-		return local;
+	
+
+	public String getQuadra() {
+		return quadra;
 	}
 
 
-	public void setLocal(String local) {
-		this.local = local;
+	public void setQuadra(String quadra) {
+		this.quadra = quadra;
 	}
 
 

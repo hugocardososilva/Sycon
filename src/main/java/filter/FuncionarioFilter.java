@@ -40,7 +40,10 @@ public class FuncionarioFilter extends AbstractFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		Usuario user= (Usuario) req.getSession(true).getAttribute("user");
-		
+		if(user==null){
+			accessDenied(request, response, req);
+			return;
+		}
 		if(user.getClass()!= Funcionario.class){
 			System.out.println("nao funcionario");
 			accessDenied(request, response, req);

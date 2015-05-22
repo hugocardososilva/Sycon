@@ -10,14 +10,14 @@ xmlns:ui="http://java.sun.com/jsf/facelets"
 	<h:form>
 		<p:growl showDetail="false" life="3000" />
 		<h:panelGrid columns="2">
-			<h:outputLabel value="Email" />
-			<h:inputText value="#{loginMB.email}" label="Email" id="email" required="true">
-				<f:validateLength minimum="6" />
+			<h:outputLabel value="Login" />
+			<h:inputText value="#{loginMB.login}" label="Login" id="Login" required="true">
+
 			</h:inputText>
 			<h:outputLabel value="Senha" />
 			
 			<h:inputSecret value="#{loginMB.senha}" label="Senha:" id="senha" required="true" autocomplete="off" >
-				<f:validateLength minimum="6" />
+
 			</h:inputSecret>
 			
 			

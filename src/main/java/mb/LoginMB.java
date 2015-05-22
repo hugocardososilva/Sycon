@@ -1,12 +1,17 @@
 package mb;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import dao.DAOFacade;
-
 import model.Funcionario;
 import model.Inquilino;
 import model.Usuario;
@@ -17,7 +22,7 @@ public class LoginMB extends AbstractMB {
 	
 	private Usuario user;
 	
-	private String email;
+	private String login;
 	private String senha;
 	public Usuario getUser() {
 		return user;
@@ -25,17 +30,19 @@ public class LoginMB extends AbstractMB {
 	public void setUser(Usuario user) {
 		this.user = user;
 	}
-	public String getEmail() {
-		return email;
+	
+	public String getLogin() {
+		return login;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	public String getSenha() {
 		return senha;
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+		
 	}
 	public String redirectAcesso(){
 		FacesContext ctx= FacesContext.getCurrentInstance();
@@ -57,8 +64,15 @@ public class LoginMB extends AbstractMB {
 	}
 	
 	public String login(){
+		System.out.println("logando");
 		DAOFacade dao= new DAOFacade();
-		Usuario usuario= dao.isValidLogin(email, senha);
+		Usuario usuario;
+		
+		try {
+			System.out.println(Usuario.convertPasswordToMD5(senha));
+			usuario = dao.isValidLogin(login, Usuario.convertPasswordToMD5(senha));
+			System.out.println(usuario);
+		
 		if(usuario!= null){
 			user = usuario;
 			FacesContext ctx= FacesContext.getCurrentInstance();
@@ -72,16 +86,36 @@ public class LoginMB extends AbstractMB {
 				}else
 					if(user.getClass()== Inquilino.class){
 						return "/protected/inquilino/index.xhtml";
+					}else{
+						return "/login.xhtml";
 					}
 			
 		}
 		displayErrorMessageToUser("Usuário ou senha inválidos");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
-	public String logout(){
+	public void logout(){
 		HttpServletRequest req=(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		req.getSession().invalidate();
-		return "/login.xhtml";
+		HttpServletResponse res= (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		System.out.println("logout");
+		try {
+			req.getRequestDispatcher("/index.xhtml").forward(req, res);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 

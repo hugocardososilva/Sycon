@@ -30,7 +30,7 @@ public class DAO<T> implements DAOInterface<T>{
 	protected EntityManager getManager(){
 		if(manager==null){
 			EntityManagerFactory factory = 
-				Persistence.createEntityManagerFactory("condominio");
+				Persistence.createEntityManagerFactory("syscon");
 			manager = factory.createEntityManager();
 		}
 		return manager;
@@ -59,7 +59,7 @@ public class DAO<T> implements DAOInterface<T>{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> findAll(){
+	public List<T> findAll() throws NullPointerException{
 		Class<T> type = (Class<T>) ((ParameterizedType) this.getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 		Query query = manager.createQuery("select x from " + type.getSimpleName() + " x" +" ORDER BY x.id");
@@ -100,7 +100,7 @@ public class DAO<T> implements DAOInterface<T>{
 			manager.getTransaction().rollback();
 	}
 	public static Connection getConnection() throws SQLException{
-		return DriverManager.getConnection("jdbc:postgresql://localhost:5432/crpmn","postgres", "12345");
+		return DriverManager.getConnection("jdbc:postgresql://localhost:5432/syscon","postgres", "12345");
 		
 	}
 

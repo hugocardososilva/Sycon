@@ -13,6 +13,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import util.TestCad;
+import dao.DAOObject;
+import dao.DAOUser;
 import model.Usuario;
 
 /**
@@ -39,8 +42,13 @@ public class LoginFilter extends AbstractFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		DAOUser dao= new DAOUser();
+		
 		HttpServletRequest req= (HttpServletRequest) request;
 		HttpSession session= req.getSession();
+		
+		
+		
 			if(session.isNew()){
 				doLogin(request, response, req);
 				return;
@@ -53,6 +61,7 @@ public class LoginFilter extends AbstractFilter implements Filter {
 			}
 		
 		chain.doFilter(request, response);
+		
 	}
 
 	/**
