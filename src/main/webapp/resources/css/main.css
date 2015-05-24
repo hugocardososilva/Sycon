@@ -71,3 +71,6 @@ a:link,a:visited,a:hover,a:active {
 	border: thin solid lightGray;
 	background: #fefeef;
 }
+#painelForm{
+	width: 500px;
+}

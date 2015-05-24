@@ -21,6 +21,9 @@ public class Pessoa extends Prestador{
 	private String email;
 	private String foto;
 	
+	private Date horaEntrada;
+	private Date horaSaida;
+	
 	private String senha;
 	private boolean bloqueado;
 	@Temporal(TemporalType.DATE)
@@ -34,6 +37,26 @@ public class Pessoa extends Prestador{
 	public Pessoa() {
 		super();
 		this.servicos= new ArrayList<Servico>();
+	}
+
+
+	public Date getHoraEntrada() {
+		return horaEntrada;
+	}
+
+
+	public void setHoraEntrada(Date horaEntrada) {
+		this.horaEntrada = horaEntrada;
+	}
+
+
+	public Date getHoraSaida() {
+		return horaSaida;
+	}
+
+
+	public void setHoraSaida(Date horaSaida) {
+		this.horaSaida = horaSaida;
 	}
 
 

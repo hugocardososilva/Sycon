@@ -13,6 +13,7 @@ public class Informacao {
 	private String endereco;
 	private long numero;
 	private String bairro;
+	private String complemento;
 	private String cidade;
 	private String estado;
 	private String webSite;
@@ -24,6 +25,14 @@ public class Informacao {
 
 	public long getId() {
 		return id;
+	}
+	
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
 
 	public void setId(long id) {
