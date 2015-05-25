@@ -11,8 +11,8 @@ public class Telefone {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private int ddd;
-	private long numero;
+	private Integer ddd;
+	private Long numero;
 	private String observacoes;
 	
 	public Telefone() {
@@ -27,19 +27,19 @@ public class Telefone {
 		this.id = id;
 	}
 
-	public int getDdd() {
+	public Integer getDdd() {
 		return ddd;
 	}
 
-	public void setDdd(int ddd) {
+	public void setDdd(Integer ddd) {
 		this.ddd = ddd;
 	}
 
-	public long getNumero() {
+	public Long getNumero() {
 		return numero;
 	}
 
-	public void setNumero(long numero) {
+	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
 

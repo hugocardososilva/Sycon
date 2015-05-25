@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+
+	<ui:composition template="/template/template.xhtml">
+	<ui:define name="divMain">
+		
+	
+		
+		<h:form id="prestadores" modal="true">
+			<p:panelGrid columns="3" >
+			<p:commandButton value="Salvar" action="#{prestadorPessoaMB.novoPrestador}"/>
+			<p:commandButton value="Limpar" action="#{prestadorPessoaMB.novoPrestador}"/>
+			<p:commandButton value="Cancelar" action="#{prestadorPessoaMB.novoPrestador}"/>
+			<h:commandButton value="Selecionar Tipo" action="#{prestadorPessoaMB.newTipo}"/>
+			</p:panelGrid>
+				<p:panelGrid columns="2" >
+    								<h:outputText value="Senha"  />
+									<p:inputText value="" required="true" 
+									disabled="#{prestadorPessoaMB.editar== true or prestadorPessoaMB.novo == true ? false : false}" 
+									label="Senha" />
+    							
+    								<h:outputText value="Nome"  />    							
+									<p:inputText value="" required="true" label="Nome" />
+									
+									<h:outputText value="Sobrenome"  />
+									<p:inputText value="" required="true" label="Sobrenome" />
+    							
+    								<h:outputText value="Endereco"  />
+									<p:inputText value="" required="true" label="Endereco" />
+									
+									<h:outputText value="Numero"  />
+									<p:inputText value="" label="Numero" />
+									
+									<h:outputText value="Complemento"  />
+									<p:inputText value=""  label="Complemento" />
+									
+									<h:outputText value="Cidade"  />
+									<p:inputText value="" label="Cidade" />
+									
+									<h:outputText value="Estado"  />
+									<p:inputText value=""  label="Estado" maxlength="2" />
+									
+									<h:outputText value="CEP"  />
+									<p:inputText value="" label="CEP" />
+									
+									<h:outputText value="Email"  />
+									<p:inputText value="" required="true" label="Email" />
+									
+									<h:outputText value="CPF"  />
+									<p:inputText value="" required="true" label="CPF" />
+									
+									<h:outputText value="RG"  />
+									<p:inputText value="" required="true" label="RG" />
+									
+									<h:outputText value="Órgão Expeditor"  />
+									<p:inputText value="" required="true" label="Órgão Expeditor" />
+									
+									
+									
+									
+									<h:outputText value="Horário de Entrada"  />
+									<p:inputText value="" required="true" label="Horário de Entrada" />
+									
+									<h:outputText value="Horário de Saída"  />
+									<p:inputText value="" required="true" label="Horário de Saída" />
+									
+									<h:outputText value="Foto"  />
+									<p:inputText value="" required="true" label="Foto" />
+					</p:panelGrid>
+					<p:panel id="telPessoa" toggleable="true" header="Telefones" style="margin-bottom:20px">
+						<p:panelGrid columns="2">
+							<p:dataTable id="telefonesPessoa" var="tel" value="#{prestadorPessoaMB.prestador.telefones}"
+							emptyMessage="Não existem registros" rows="5" paginator="true">
+							<f:facet name="header">
+								 <p:outputPanel style="float:left;">
+								 		<p:commandButton value="Adicionar Telefone" onclick="PF('novoTelefoneWidiget').show();" update=":novoTelefonePessoaForm"/>
+								 		
+								 </p:outputPanel>
+							</f:facet>
+							
+							<p:column headerText="DDD">
+								<h:outputText value="#{tel.ddd}"/>
+								
+							</p:column>
+							<p:column headerText="Número">
+								<h:outputText value="#{tel.numero}"/>
+								
+							</p:column>
+							<p:column headerText="Observações">
+								<h:outputText value="#{tel.observacoes}"/>
+								
+							</p:column>
+							<p:column headerText="Opções" style="width:100px;">
+								<p:commandButton value="Adicionar Telefone" action="#{prestadorPessoaMB.novoPrestador}"/>
+								
+							</p:column>
+							
+							</p:dataTable>
+						</p:panelGrid>
+					</p:panel>
+					<p:panel id="tipoServico" toggleable="true" header="Tipos de Serviço" style="margin-bottom:20px">
+						<p:panelGrid columns="2">
+							<p:dataTable id="tipoServicoPessoa" var="tipo" value="#{prestadorPessoaMB.prestador.tipos}"
+							emptyMessage="Não existem registros" rows="5" paginator="true">
+							<f:facet name="header">
+								 <p:outputPanel style="float:left;">
+								 		<p:commandButton value="Selecionar Tipo" action="#{prestadorPessoaMB.novoTipoServico}" immediate="true"/>
+								 </p:outputPanel>
+							</f:facet>
+							
+							<p:column headerText="Tipo">
+								<h:outputText value="#{tipo.tipo}"/>
+								
+							</p:column>
+							<p:column headerText="Descrição">
+								<h:outputText value="#{tipo.descricao}"/>
+								
+							</p:column>
+							<p:column headerText="Opções" style="width:100px;">
+								<p:commandButton value="Adicionar Tipo" action="#{prestadorPessoaMB.novoPrestador}" />
+								
+							</p:column>
+							
+							</p:dataTable>
+						</p:panelGrid>
+					</p:panel>
+			
+		</h:form>
+	
+	
+		
+		
+		
+		<ui:include src="/protected/funcionario/dialogs/novo-telefone.xhtml"/>
+		
+		</ui:define>
+		
+		
+		
+		<ui:define name="divLeft">
+		<ui:include src="/protected/funcionario/menu.xhtml"/>
+		
+		
+		</ui:define>
+	</ui:composition>
+	
+</h:body>
+</html>

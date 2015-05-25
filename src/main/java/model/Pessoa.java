@@ -28,6 +28,7 @@ public class Pessoa extends Prestador{
 	private boolean bloqueado;
 	@Temporal(TemporalType.DATE)
 	private Date ultimoAcesso;
+	
 	private List<Servico> servicos;
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)

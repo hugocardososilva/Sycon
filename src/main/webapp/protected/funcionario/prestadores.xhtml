@@ -12,90 +12,9 @@
 	
 		
 		<h:form id="prestadores" modal="true">
-			<p:panelGrid columns="3" >
-			<p:commandButton value="Salvar" action="#{prestadorPessoaMB.novoPrestador}"/>
-			<p:commandButton value="Limpar" action="#{prestadorPessoaMB.novoPrestador}"/>
-			<p:commandButton value="Cancelar" action="#{prestadorPessoaMB.novoPrestador}"/>
 			
-			</p:panelGrid>
-				<p:panelGrid columns="2" >
-    								<h:outputText value="Senha"  />
-									<p:inputText value="" required="true" disabled="#{prestadorPessoaMB.editar== false ? true : false}" label="Senha" />
-    							
-    								<h:outputText value="Nome"  />    							
-									<p:inputText value="" required="true" label="Nome" />
-									
-									<h:outputText value="Sobrenome"  />
-									<p:inputText value="" required="true" label="Sobrenome" />
-    							
-    								<h:outputText value="Endereco"  />
-									<p:inputText value="" required="true" label="Endereco" />
-									
-									<h:outputText value="Numero"  />
-									<p:inputText value="" label="Numero" />
-									
-									<h:outputText value="Complemento"  />
-									<p:inputText value=""  label="Complemento" />
-									
-									<h:outputText value="Cidade"  />
-									<p:inputText value="" label="Cidade" />
-									
-									<h:outputText value="Estado"  />
-									<p:inputText value=""  label="Estado" maxlength="2" />
-									
-									<h:outputText value="CEP"  />
-									<p:inputText value="" label="CEP" />
-									
-									<h:outputText value="Email"  />
-									<p:inputText value="" required="true" label="Email" />
-									
-									<h:outputText value="CPF"  />
-									<p:inputText value="" required="true" label="CPF" />
-									
-									<h:outputText value="RG"  />
-									<p:inputText value="" required="true" label="RG" />
-									
-									<h:outputText value="Órgão Expeditor"  />
-									<p:inputText value="" required="true" label="Órgão Expeditor" />
-									
-									
-									
-									
-									<h:outputText value="Horário de Entrada"  />
-									<p:inputText value="" required="true" label="Horário de Entrada" />
-									
-									<h:outputText value="Horário de Saída"  />
-									<p:inputText value="" required="true" label="Horário de Saída" />
-									
-									<h:outputText value="Foto"  />
-									<p:inputText value="" required="true" label="Foto" />
-					</p:panelGrid>
-					<p:panel id="basic" toggleable="true" header="Tipos de Serviço" style="margin-bottom:20px">
-						<p:panelGrid columns="2">
-							<p:dataTable id="tipoServicoPessoa" var="tipo" value="#{prestadorPessoaMB.prestador.tipos}"
-							emptyMessage="Não existem registros" rows="5" paginator="true">
-							<f:facet name="footer">
-								 <p:outputPanel style="float:left;">
-								 		<p:commandButton value="Adicionar Prestador" action="#{prestadorPessoaMB.novoPrestador}"/>
-								 </p:outputPanel>
-							</f:facet>
-							
-							<p:column headerText="Tipo">
-								<h:outputText value="#{tipo.tipo}"/>
-								
-							</p:column>
-							<p:column headerText="Descrição">
-								<h:outputText value="#{tipo.descricao}"/>
-								
-							</p:column>
-							<p:column headerText="Opções" style="width:100px;">
-								<p:commandButton value="Adicionar Prestador" action="#{prestadorPessoaMB.novoPrestador}"/>
-								
-							</p:column>
-							
-							</p:dataTable>
-						</p:panelGrid>
-					</p:panel>
+			<p:commandButton value="Novo" action="#{prestadorPessoaMB.novoPrestador}"/>
+			
 			
 		</h:form>
 	
