@@ -1,31 +1,43 @@
 package mb;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.CaptureEvent;
 
 import dao.DAO;
 import dao.DAOPrestadorPessoa;
 import dao.DAOTelefone;
+import dao.DAOTipoServico;
 import model.Pessoa;
-
 import model.Telefone;
 import model.TipoServico;
 
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 public class PrestadorPessoaMB {
 	private DAOPrestadorPessoa daop= new DAOPrestadorPessoa();
 	private DAO dao = new DAO();
 	private DAOTelefone daot= new DAOTelefone();
+	private DAOTipoServico daotipo= new DAOTipoServico();
 	private Pessoa prestador;
 	private boolean editar;
 	private boolean novo;
+	private boolean novoTipoServico;
 	private Telefone telefone;
 	private List<TipoServico> tipos;
-	private TipoServico tipoServico;
+	private TipoServico tipoServico;	
+	private List<Pessoa> prestadores;
+	
 	
 	public PrestadorPessoaMB() {
 		this.editar= false;
@@ -34,6 +46,9 @@ public class PrestadorPessoaMB {
 		this.tipos= new ArrayList<TipoServico>();
 		this.tipoServico= new TipoServico();
 		this.prestador= new Pessoa();
+		this.novoTipoServico= false;
+		this.prestadores= new ArrayList<Pessoa>();
+		getPessoas();
 	}
 	
 	
@@ -43,7 +58,25 @@ public class PrestadorPessoaMB {
 
 
 	public List<TipoServico> getTipos() {
+		dao.open();
+		dao.begin();
+		tipos= daotipo.findAll();
+		dao.close();
 		return tipos;
+	}
+
+
+	public List<Pessoa> getPessoas() {
+		dao.open();
+		dao.begin();
+		prestadores = daop.findAll();
+		return prestadores;
+	}
+
+
+	public void setPessoas(List<Pessoa> pessoas) {
+		
+		this.prestadores = pessoas;
 	}
 
 
@@ -97,6 +130,16 @@ public class PrestadorPessoaMB {
 	}
 
 
+	public boolean isNovoTipoServico() {
+		return novoTipoServico;
+	}
+
+
+	public void setNovoTipoServico(boolean novoTipoServico) {
+		this.novoTipoServico = novoTipoServico;
+	}
+
+
 	public void resetPrestador(){
 		this.prestador= new Pessoa();
 	}
@@ -108,7 +151,7 @@ public class PrestadorPessoaMB {
 	}
 	
 	public String redirectPrestadores(){
-		return "prestadores";
+		return "prestadores?faces-redirect=true";
 	}
 	public String novoPrestador(){
 		resetPrestador();
@@ -118,10 +161,11 @@ public class PrestadorPessoaMB {
 		
 		
 	}
-	public String newTipo(){
-		System.out.println("novo tipo");
-		resetTipoServico();
-		return "tipos-servico-pessoa";
+	
+	public void newTipoServico(){
+		System.out.println("novo tipos");
+		RequestContext.getCurrentInstance().openDialog("dialogs/tipos-servico-pessoa");
+		
 	}
 	public String novoTipoServico(){
 		System.out.println("novo tipo");
@@ -145,5 +189,49 @@ public class PrestadorPessoaMB {
 		
 		
 	}
+	public void visualizarNovoTipo(){
+		System.out.println("novo tipo de servico");
+		if(novoTipoServico== false){
+		this.novoTipoServico= true;
+		}else{
+		this.novoTipoServico= false;
+		}
+	}
+	
+	public void adicionarTipoServico(){
+		System.out.println("adicionar tipo de servico");
+		dao.open();
+		dao.begin();
+		daotipo.persist(tipoServico);
+		dao.commit();
+		resetTipoServico();
+		this.novoTipoServico= false;
+		getTipoServico();
+		
+		
+	}
+	public void selecionarTipoServico(){
+		System.out.println("selecionando tipo de servico para prestador");
+		this.prestador.addTipo(tipoServico);
+		resetTipoServico();
+	}
+	public void removerTipoServico() {
+		System.out.println("removendo tipo de servico do prestador");
+		this.prestador.removeTipo(tipoServico);
+		resetTipoServico();
+	}
+	
+	public void captura(CaptureEvent cEvent){
+		ImageMB imb= new ImageMB();
+		System.out.println("capturando imagem");
+		ServletContext ctx= (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+		
+		String filename = imb.oncapture(ctx, cEvent);
+		System.out.println(filename);
+		this.prestador.setFoto(filename);
+		
+		
+	}
+	
 	
 }

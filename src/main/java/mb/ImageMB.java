@@ -20,7 +20,8 @@ public class ImageMB  {
 	public String oncapture(ServletContext context, CaptureEvent captureEvent){
 		byte[] data = captureEvent.getData();
 		filename= getRandomImageName();
-		String nomeArquivo = File.separator+"condominioImages"+File.separator + filename+".jpeg";
+		String nomeArquivo = "C:"+File.separator+"syscon"+File.separator + filename+".jpeg";
+//		String nomeArquivo = "/sysconImages" +File.separator + filename+".jpeg";
 //		user.setImagem(nomeArquivo);
 		System.out.println("nome do arquivo");
 		System.out.println(nomeArquivo);

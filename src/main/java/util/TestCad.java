@@ -9,8 +9,7 @@ import model.Funcionario;
 import model.Usuario;
 
 public class TestCad {
-	
-	public void cadastrar(){
+	public static void main(String[] args) {
 		Usuario admin = new Funcionario();
 		admin.setCpf("1234567890");
 		admin.setEmail("hugocardososilva@gmail.com");
@@ -27,8 +26,11 @@ public class TestCad {
 		daou.persist(admin);
 		daou.commit();
 		
+	}
+	public static void cadastrar(){
+	
 		
 		
 	}
-
+	
 }

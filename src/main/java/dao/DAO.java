@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -64,6 +65,14 @@ public class DAO<T> implements DAOInterface<T>{
 				.getGenericSuperclass()).getActualTypeArguments()[0];
 		Query query = manager.createQuery("select x from " + type.getSimpleName() + " x" +" ORDER BY x.id");
 		return (List<T>) query.getResultList();
+
+	}
+	@SuppressWarnings("unchecked")
+	public Set<T> findAllSet() throws NullPointerException{
+		Class<T> type = (Class<T>) ((ParameterizedType) this.getClass()
+				.getGenericSuperclass()).getActualTypeArguments()[0];
+		Query query = manager.createQuery("select x from " + type.getSimpleName() + " x" +" ORDER BY x.id");
+		return (Set<T>) query.getResultList();
 
 	}
 

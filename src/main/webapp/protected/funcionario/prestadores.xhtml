@@ -13,9 +13,36 @@
 		
 		<h:form id="prestadores" modal="true">
 			
+			<p:panel id="prestadoresGrupoBotoes">
+			
 			<p:commandButton value="Novo" action="#{prestadorPessoaMB.novoPrestador}"/>
 			
+			</p:panel>
 			
+			<p:panel>
+			<p:dataTable id="prestadoresDataTable" var="prestador" value="#{prestadorPessoaMB.prestadores}"
+			emptyMessage="Não existem registros" rows="5" paginator="true">
+				<f:facet name="heaer">
+					<h:outputText value="Prestadores"/>
+				</f:facet>
+				
+				<p:column headerText="Nome">
+					<h:outputText value="#{prestador.nome}"/>
+				</p:column>
+				<p:column headerText="Sobrenome">
+					<h:outputText value="#{prestador.sobrenome}"/>
+				</p:column>
+				<p:column headerText="CPF">
+					<h:outputText value="#{prestador.cpf}"/>
+				</p:column>
+				<p:column headerText="Bloqueado">
+					<h:outputText value="#{prestador.bloqueado == true ? SIM : NÃO}"/>
+				</p:column>
+				
+			
+			</p:dataTable>
+			
+			</p:panel>
 		</h:form>
 	
 	

@@ -16,8 +16,9 @@
 			<p:commandButton value="Salvar" action="#{prestadorPessoaMB.novoPrestador}"/>
 			<p:commandButton value="Limpar" action="#{prestadorPessoaMB.novoPrestador}"/>
 			<p:commandButton value="Cancelar" action="#{prestadorPessoaMB.novoPrestador}"/>
-			<h:commandButton value="Selecionar Tipo" action="#{prestadorPessoaMB.newTipo}"/>
+			
 			</p:panelGrid>
+			<p:messages autoUpdate="true"/>
 				<p:panelGrid columns="2" >
     								<h:outputText value="Senha"  />
 									<p:inputText value="" required="true" 
@@ -68,9 +69,12 @@
 									
 									<h:outputText value="Horário de Saída"  />
 									<p:inputText value="" required="true" label="Horário de Saída" />
-									
+								</p:panelGrid >
+									<p:panelGrid columns="3">
 									<h:outputText value="Foto"  />
-									<p:inputText value="" required="true" label="Foto" />
+									<p:graphicImage value="/../sysconImages/#{prestadorPessoaMB.prestador.foto}.jpeg" width="150px" height="150px"/>
+									<p:commandButton value="Capturar" onclick="PF('capturarImagemWidget').show();" update=":prestadores" rendered="#{empty prestadorPessoaMB.prestador.foto}"/>
+									<p:commandButton value="Remover" onclick="PF('capturarImagemWidget').show();" update=":prestadores" rendered="#{empty prestadorPessoaMB.prestador.foto}"/>
 					</p:panelGrid>
 					<p:panel id="telPessoa" toggleable="true" header="Telefones" style="margin-bottom:20px">
 						<p:panelGrid columns="2">
@@ -109,7 +113,7 @@
 							emptyMessage="Não existem registros" rows="5" paginator="true">
 							<f:facet name="header">
 								 <p:outputPanel style="float:left;">
-								 		<p:commandButton value="Selecionar Tipo" action="#{prestadorPessoaMB.novoTipoServico}" immediate="true"/>
+								 		<p:commandButton value="Selecionar Tipo" onclick="PF('tipoServicoPessoaWidget').show();" update=":tipoServicoPrestadorForm" />
 								 </p:outputPanel>
 							</f:facet>
 							
@@ -122,7 +126,9 @@
 								
 							</p:column>
 							<p:column headerText="Opções" style="width:100px;">
-								<p:commandButton value="Adicionar Tipo" action="#{prestadorPessoaMB.novoPrestador}" />
+								<p:commandButton value="Remover" action="#{prestadorPessoaMB.removerTipoServico}" immediate="true" update=":prestadores:tipoServico" >
+								<f:setPropertyActionListener value="#{tipo}" target="#{prestadorPessoaMB.tipoServico}"></f:setPropertyActionListener>
+								</p:commandButton>
 								
 							</p:column>
 							
@@ -137,6 +143,8 @@
 		
 		
 		<ui:include src="/protected/funcionario/dialogs/novo-telefone.xhtml"/>
+		<ui:include src="/protected/funcionario/dialogs/tipos-servico-pessoa.xhtml"/>
+			<ui:include src="/protected/funcionario/dialogs/capturar-imagem.xhtml"/>
 		
 		</ui:define>
 		

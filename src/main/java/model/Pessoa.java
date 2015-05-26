@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -15,13 +16,20 @@ public class Pessoa extends Prestador{
 	
 	private String nome;
 	private String sobrenome;
+	
+	@Column(unique=true)
 	private long cpf;
+	
+	@Column(unique= true)
 	private long rg;
 	private String orgaoExpeditor;
+	
+	@Column(unique= true)
 	private String email;
 	private String foto;
-	
+	@Temporal(TemporalType.DATE)
 	private Date horaEntrada;
+	@Temporal(TemporalType.DATE)
 	private Date horaSaida;
 	
 	private String senha;

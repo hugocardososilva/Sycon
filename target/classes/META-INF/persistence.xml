@@ -29,12 +29,13 @@
 		    <property name="javax.persistence.jdbc.user" value="postgres" />
 		    <property name="javax.persistence.jdbc.password" value="12345" />
 		    
-		    <property name="eclipselink.ddl-generation" value="create-tables" />
-		    <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+		    <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
+		    <property name="eclipselink.ddl-generation.output-mode" value="both"/>
 		    <property name="eclipselink.logging.level" value="WARNING"/>
 		    <property name="eclipselink.exclude-eclipselink-orm" value="true"/>
 		    <property name="eclipselink.target-server" value="None"/>
-		    <property name="eclipselink.target-database" value="PostgreSQL"/>	   
+		    <property name="eclipselink.target-database" value="PostgreSQL"/>
+		    <property name="eclipselink.temporal.mutable" value="true"/>	   
 		</properties>	
 		</persistence-unit>
 </persistence>
