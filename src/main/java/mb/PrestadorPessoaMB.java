@@ -1,6 +1,7 @@
 package mb;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -11,24 +12,32 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
+import org.postgresql.util.PSQLException;
+import org.primefaces.component.calendar.Calendar;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CaptureEvent;
 
 import dao.DAO;
+import dao.DAOInformacao;
+import dao.DAOLote;
 import dao.DAOPrestadorPessoa;
 import dao.DAOTelefone;
 import dao.DAOTipoServico;
+import model.Informacao;
+import model.Lote;
 import model.Pessoa;
 import model.Telefone;
 import model.TipoServico;
 
 @ManagedBean
 @ViewScoped
-public class PrestadorPessoaMB {
+public class PrestadorPessoaMB  extends AbstractMB{
 	private DAOPrestadorPessoa daop= new DAOPrestadorPessoa();
 	private DAO dao = new DAO();
+	private DAOLote daol= new DAOLote();
 	private DAOTelefone daot= new DAOTelefone();
 	private DAOTipoServico daotipo= new DAOTipoServico();
+	private DAOInformacao daoi= new DAOInformacao();
 	private Pessoa prestador;
 	private boolean editar;
 	private boolean novo;
@@ -37,21 +46,80 @@ public class PrestadorPessoaMB {
 	private List<TipoServico> tipos;
 	private TipoServico tipoServico;	
 	private List<Pessoa> prestadores;
+	private List<Lote> lotes;
+	private Informacao informacao;
+	private Lote lote;
+
 	
 	
 	public PrestadorPessoaMB() {
 		this.editar= false;
 		this.novo= false;
+		this.lote= new Lote();
+		this.lotes = new ArrayList<Lote>();
 		this.telefone= new Telefone();
 		this.tipos= new ArrayList<TipoServico>();
 		this.tipoServico= new TipoServico();
 		this.prestador= new Pessoa();
+		this.informacao= new Informacao();
+		
 		this.novoTipoServico= false;
 		this.prestadores= new ArrayList<Pessoa>();
 		getPessoas();
 	}
 	
 	
+
+
+	public Lote getLote() {
+		return lote;
+	}
+
+
+
+
+	public void setLote(Lote lote) {
+		this.lote = lote;
+	}
+
+
+
+
+	public Informacao getInformacao() {
+		return informacao;
+	}
+
+
+	public List<Pessoa> getPrestadores() {
+		return prestadores;
+	}
+
+
+	public void setPrestadores(List<Pessoa> prestadores) {
+		this.prestadores = prestadores;
+	}
+
+
+	public List<Lote> getLotes() {
+		dao.open();
+		dao.begin();
+		
+		lotes= daol.findAll();
+		dao.close();
+		return lotes;
+	}
+
+
+	public void setLotes(List<Lote> lotes) {
+		this.lotes = lotes;
+	}
+
+
+	public void setInformacao(Informacao informacao) {
+		this.informacao = informacao;
+	}
+
+
 	public Pessoa getPrestador() {
 		return prestador;
 	}
@@ -138,6 +206,9 @@ public class PrestadorPessoaMB {
 	public void setNovoTipoServico(boolean novoTipoServico) {
 		this.novoTipoServico = novoTipoServico;
 	}
+	public void getNow(){
+		this.prestador.setUltimoAcesso(new GregorianCalendar().getTime());
+	}
 
 
 	public void resetPrestador(){
@@ -154,6 +225,7 @@ public class PrestadorPessoaMB {
 		return "prestadores?faces-redirect=true";
 	}
 	public String novoPrestador(){
+		System.out.println("novo prestador");
 		resetPrestador();
 		this.editar= false;
 		this.novo= true;
@@ -177,13 +249,13 @@ public class PrestadorPessoaMB {
 
 	public void salvarTelefone(){
 		
-		dao.open();
-		dao.begin();
-		daot.persist(telefone);
+//		dao.open();
+//		dao.begin();
+//		daot.persist(telefone);
 //		daop.persist(prestador);
 		prestador.addTelefone(telefone);
 //		daop.merge(prestador);
-		dao.commit();
+//		dao.commit();
 		resetTelefone();
 		
 		
@@ -192,10 +264,13 @@ public class PrestadorPessoaMB {
 	public void visualizarNovoTipo(){
 		System.out.println("novo tipo de servico");
 		if(novoTipoServico== false){
-		this.novoTipoServico= true;
+		novoTipoServico= true;
 		}else{
+		
 		this.novoTipoServico= false;
 		}
+		
+		System.out.println(novoTipoServico);
 	}
 	
 	public void adicionarTipoServico(){
@@ -213,6 +288,7 @@ public class PrestadorPessoaMB {
 	public void selecionarTipoServico(){
 		System.out.println("selecionando tipo de servico para prestador");
 		this.prestador.addTipo(tipoServico);
+		tipoServico.addPrestador(prestador);
 		resetTipoServico();
 	}
 	public void removerTipoServico() {
@@ -232,6 +308,36 @@ public class PrestadorPessoaMB {
 		
 		
 	}
+	public void salvarPessoa(){
+		System.out.println("Adicionando novo prestador");
+		System.out.println("hora inicio  " + prestador.getHoraEntrada() );
+		dao.open();
+		dao.begin();
+		getNow();
+		
+		daotipo.merge(tipoServico);
+		prestador.setInformacao(informacao);
+		daoi.persist(informacao);
+		daop.persist(prestador);
+		
+		dao.commit();
+		this.editar= false;
+		this.novo= false;
+		
+		
+	}
 	
+	public void limparPrestador(){
+		System.out.println("limpar prestador");
+		resetPrestador();
+		resetTelefone();
+		resetTipoServico();
+	}
+	public void visualizarPrestador(){
+		
+	}
+	public void bloquearPrestador(){
+		displayInfoMessageToUser("Prestador Bloqueado!");
+	}
 	
 }

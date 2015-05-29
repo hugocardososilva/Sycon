@@ -18,7 +18,7 @@
         <p:photoCam widgetVar="pc" listener="#{prestadorPessoaMB.captura}" />
         <p:commandButton value="Capturar" onclick="PF('pc').capture();"
         oncomplete="PF('capturarImagemWidget').hide();"
-        update=":messageGrowl :prestadores"/>
+        update=":messageGrowl :prestadores:painelImagemGrid"/>
        
         
 		</p:panelGrid>	

@@ -15,12 +15,12 @@
 			
 			<p:panel id="prestadoresGrupoBotoes">
 			
-			<p:commandButton value="Novo" action="#{prestadorPessoaMB.novoPrestador}"/>
+			<p:commandButton value="Novo" action="#{prestadorPessoaMB.novoPrestador}" icon="fa fa-plus"  styleClass="ui-priority-primary"  />
 			
 			</p:panel>
 			
 			<p:panel>
-			<p:dataTable id="prestadoresDataTable" var="prestador" value="#{prestadorPessoaMB.prestadores}"
+			<p:dataTable id="prestadoresDataTable" var="prestador" value="#{prestadorPessoaMB.pessoas}"
 			emptyMessage="Não existem registros" rows="5" paginator="true">
 				<f:facet name="heaer">
 					<h:outputText value="Prestadores"/>
@@ -36,7 +36,11 @@
 					<h:outputText value="#{prestador.cpf}"/>
 				</p:column>
 				<p:column headerText="Bloqueado">
-					<h:outputText value="#{prestador.bloqueado == true ? SIM : NÃO}"/>
+					<h:outputText value="#{prestador.bloqueado}"/>
+				</p:column>
+				<p:column headerText="Opções">
+					<p:commandButton icon="fa fa-search-plus" action="#{prestadorPessoaMB.visualizarPrestador}" update=":prestadores" styleClass="ui-priority-primary"/>
+					<p:commandButton icon="fa fa-ban" styleClass="ui-state-error" action="#{prestadorPessoaMB.bloquearPrestador}" update=":prestadores"/>
 				</p:column>
 				
 			

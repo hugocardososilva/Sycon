@@ -12,6 +12,7 @@
 	
 		
 		<h:form id="novoLoteForm" modal="true">
+		<p:panel>
 			<h:panelGrid columns="2">
 				<h:outputText value="Número" />
 				<h:inputText value="#{lotesMB.lote.numero}" required="true" label="Número" >
@@ -32,6 +33,7 @@
 				
 				<p:button value="Cancelar" outcome="lotes" icon="ui-icon-cancel"/>
 			</h:panelGrid>
+		</p:panel>
 		</h:form>
 	
 	

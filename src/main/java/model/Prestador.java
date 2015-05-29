@@ -25,7 +25,7 @@ public class Prestador {
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Informacao informacao;
 	
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.PERSIST,fetch=FetchType.LAZY)
 	private List<TipoServico> tipos;
 	
 	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)

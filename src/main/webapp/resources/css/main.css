@@ -10,7 +10,7 @@ body {
 	overflow: hidden;
 	padding: 0;
 	margin: 0;
-	width: 100%;
+	width: 900px%;
 	height: 100%;
 }
 
@@ -73,4 +73,7 @@ a:link,a:visited,a:hover,a:active {
 }
 #painelForm{
 	width: 500px;
+}
+.container{
+	width: 900px;
 }

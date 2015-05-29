@@ -20,7 +20,7 @@ public class TipoServico {
 	@Column(unique= true)
 	private String tipo;
 	private String descricao;
-	@ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
 	private List<Prestador> prestadores;
 	
 	

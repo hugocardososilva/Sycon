@@ -18,23 +18,23 @@ public class Pessoa extends Prestador{
 	private String sobrenome;
 	
 	@Column(unique=true)
-	private long cpf;
+	private Long cpf;
 	
 	@Column(unique= true)
-	private long rg;
+	private Long rg;
 	private String orgaoExpeditor;
 	
 	@Column(unique= true)
 	private String email;
 	private String foto;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date horaEntrada;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date horaSaida;
-	
+	@Column(unique= true)
 	private String senha;
 	private boolean bloqueado;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date ultimoAcesso;
 	
 	private List<Servico> servicos;
@@ -46,6 +46,7 @@ public class Pessoa extends Prestador{
 	public Pessoa() {
 		super();
 		this.servicos= new ArrayList<Servico>();
+		lote= new Lote();
 	}
 
 
@@ -99,22 +100,22 @@ public class Pessoa extends Prestador{
 	}
 
 
-	public long getCpf() {
+	public Long getCpf() {
 		return cpf;
 	}
 
 
-	public void setCpf(long cpf) {
+	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
 
 
-	public long getRg() {
+	public Long getRg() {
 		return rg;
 	}
 
 
-	public void setRg(long rg) {
+	public void setRg(Long rg) {
 		this.rg = rg;
 	}
 

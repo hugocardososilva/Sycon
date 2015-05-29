@@ -13,8 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+
+import converter.GenericInterface;
 @Entity
-public class Lote {
+public class Lote implements GenericInterface{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -128,5 +130,12 @@ public class Lote {
 		this.servicos.remove(s);
 	}
 
+
+	@Override
+	public String toString() {
+		return "Lote [id=" + id + ", numero=" + numero + ", quadra=" + quadra
+				+ "]";
+	}
+	
 
 }

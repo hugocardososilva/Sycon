@@ -11,13 +11,13 @@ public class Informacao {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String endereco;
-	private long numero;
+	private Long numero;
 	private String bairro;
 	private String complemento;
 	private String cidade;
 	private String estado;
 	private String webSite;
-	private long cep;
+	private Long cep;
 	
 	public Informacao() {
 		
@@ -47,11 +47,11 @@ public class Informacao {
 		this.endereco = endereco;
 	}
 
-	public long getNumero() {
+	public Long getNumero() {
 		return numero;
 	}
 
-	public void setNumero(long numero) {
+	public void setNumero(Long numero) {
 		this.numero = numero;
 	}
 
@@ -87,11 +87,11 @@ public class Informacao {
 		this.webSite = webSite;
 	}
 
-	public long getCep() {
+	public Long getCep() {
 		return cep;
 	}
 
-	public void setCep(long cep) {
+	public void setCep(Long cep) {
 		this.cep = cep;
 	}
 	
