@@ -16,7 +16,7 @@
 		
 		
 			<p:panelGrid columns="3" >
-			<p:commandButton value="Salvar" action="#{prestadorPessoaMB.salvarPessoa}" update=":prestadores" icon="fa fa-save" />
+			<p:commandButton value="Salvar" action="#{prestadorPessoaMB.salvarPessoa}" update=":prestadores" icon="fa fa-save" styleClass="btn btn-success"/>
 			<p:commandButton icon="fa fa-paint-brush"  value="Limpar" actionListener="#{prestadorPessoaMB.limparPrestador}" immediate="true" process="@none"  update=":prestadores :prestadores:painelImagemGrid">
 				<p:resetInput target="prestadores"></p:resetInput>
 			</p:commandButton>
@@ -39,22 +39,23 @@
 			<p:panelGrid>
 				<p:row>
 					<p:column>
-						<h:outputText value="Senha"  />
+						 <p:outputLabel for="senhaPrestador" value="Senha:" />
 					</p:column>
 					<p:column>
-						<p:inputText value="#{prestadorPessoaMB.prestador.senha}" required="true" 
+						<p:inputText id="senhaPrestador" value="#{prestadorPessoaMB.prestador.senha}" required="true" 
 									disabled="#{prestadorPessoaMB.editar== true or prestadorPessoaMB.novo == true ? false : false}" 
 									label="Senha" >
 									<f:validateLength minimum="6" maximum="6"/>
 									</p:inputText>
 					</p:column>
 					<p:column>
-							<h:outputText value="CPF"  />
+							<p:outputLabel for="cpfPrestador" value="CPF:" />
 												
 					</p:column>
 					<p:column>
-							<p:inputText value="#{prestadorPessoaMB.prestador.cpf}" required="true" label="CPF" />			
+							<p:inputText id="cpfPrestador" value="#{prestadorPessoaMB.prestador.cpf}" required="true" label="CPF" />			
 					</p:column>
+					
 					<p:column rowspan="3">
 						<p:graphicImage value="/../sysconImages/#{prestadorPessoaMB.prestador.foto}.jpeg" width="150px" height="130px"/>
 					</p:column>
@@ -66,94 +67,94 @@
 				</p:row>	
 				<p:row>
 					<p:column>
-					<h:outputText value="Nome"  />    
+					<p:outputLabel for="nomePrestador" value="Nome:" />   
 									
 					</p:column>
 					<p:column>
-						<p:inputText value="#{prestadorPessoaMB.prestador.nome}" required="true" label="Nome" />
+						<p:inputText id="nomePrestador" value="#{prestadorPessoaMB.prestador.nome}" required="true" label="Nome" />
 					</p:column>
 				
 					<p:column>
-						<h:outputText value="Sobrenome"  />
+						<p:outputLabel for="sobrenomePrestador" value="Sobrenome:" />
 					</p:column>
 					<p:column>
-						<p:inputText value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" />
+						<p:inputText id="sobrenomePrestador" value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" />
 					</p:column>
 					
 					
 				</p:row>
 				<p:row>
 					<p:column>
-						<h:outputText value="RG"  />
+						<p:outputLabel for="rgPrestador" value="RG:" />
 					</p:column>
 					<p:column>
-						<p:inputText value="#{prestadorPessoaMB.prestador.rg}" required="true" label="RG" />
+						<p:inputText id="rgPrestador" value="#{prestadorPessoaMB.prestador.rg}" required="true" label="RG" />
 					</p:column>
 					<p:column>
-						<h:outputText value="Órgão Expeditor"  />
+						<p:outputLabel for="orgaoPrestador" value="Órgão Expeditor:" />
 					</p:column>
 					<p:column>
-						<p:inputText value="#{prestadorPessoaMB.prestador.orgaoExpeditor}" required="true" label="Órgão Expeditor" />
+						<p:inputText id="orgaoPrestador" value="#{prestadorPessoaMB.prestador.orgaoExpeditor}" label="Órgão Expeditor" />
 					</p:column>
 				</p:row>
 				<p:row>
 					<p:column>
-						<h:outputText value="Endereço"  />
+						<p:outputLabel for="enderecoPrestador" value="Endereço:" />
 					</p:column>
 					<p:column colspan="3">
-						<p:inputText value="#{prestadorPessoaMB.informacao.endereco}" required="true" label="Endereco" style="width:98%" />	
+						<p:inputText id="enderecoPrestador" value="#{prestadorPessoaMB.informacao.endereco}" required="true" label="Endereco" style="width:98%" />	
 					</p:column >
 					<p:column>
-						<h:outputText value="Número"  />	
+						<p:outputLabel for="numeroPrestador" value="Número:" />	
 					</p:column>
 					<p:column>
-						<p:inputText value="#{prestadorPessoaMB.informacao.numero}" label="Numero" style="width:98%" />		
+						<p:inputText id="numeroPrestador" value="#{prestadorPessoaMB.informacao.numero}" label="Numero" style="width:98%" />		
 					</p:column>
 				</p:row>
 				<p:row>
 					<p:column>
-						<h:outputText value="Bairro"  />
+						<p:outputLabel for="bairroPrestador" value="Bairro:" />	
 					</p:column>
 					<p:column colspan="2">
-						<p:inputText value="#{prestadorPessoaMB.informacao.bairro}"  label="Bairro" style="width:98%"/>
+						<p:inputText id="bairroPrestador" value="#{prestadorPessoaMB.informacao.bairro}"  label="Bairro" style="width:98%"/>
 					</p:column>
 					<p:column>
-						<h:outputText value="Complemento"  />
+						<p:outputLabel for="complementoPrestador" value="Complemento:" />
 					</p:column>
 					<p:column colspan="2">
-						<p:inputText value="#{prestadorPessoaMB.informacao.complemento}"  label="Complemento" style="width:98%"/>
+						<p:inputText id="complementoPrestador" value="#{prestadorPessoaMB.informacao.complemento}"  label="Complemento" style="width:98%"/>
 					</p:column>
 				
 				</p:row>
 				<p:row>
 					<p:column>
-						<h:outputText value="Cidade"  />
+						<p:outputLabel for="cidadePrestador" value="Cidade:" />
 					</p:column>
 					<p:column>
-						<p:inputText value="#{prestadorPessoaMB.informacao.cidade}" label="Cidade" />
+						<p:inputText id="cidadePrestador" value="#{prestadorPessoaMB.informacao.cidade}" label="Cidade" />
 					</p:column>
 					<p:column>
-						<h:outputText value="Estado"  />
+						<p:outputLabel for="estadoPrestador" value="Estado:" />
 					</p:column>
 					<p:column>
-						<p:inputText value="#{prestadorPessoaMB.informacao.estado}"  label="Estado" maxlength="2" size="2" />
+						<p:inputText id="estadoPrestador" value="#{prestadorPessoaMB.informacao.estado}"  label="Estado" maxlength="2" size="2" />
 					</p:column>
 					<p:column>
-						<h:outputText value="CEP"  />
+						<p:outputLabel for="cepPrestador" value="CEP:" />
 					</p:column>
 					<p:column>
-						<p:inputText value="#{prestadorPessoaMB.informacao.cep}" label="CEP" style="width:98%"  />
+						<p:inputText id="cepPrestador" value="#{prestadorPessoaMB.informacao.cep}" label="CEP" style="width:98%"  />
 					</p:column>
 				</p:row>
 				<p:row>
 					<p:column>
-						<h:outputText value="Email"  />
+						<p:outputLabel for="emailPrestador" value="Email:" />
 					</p:column>
 					<p:column colspan="2">
-						<p:inputText value="#{prestadorPessoaMB.prestador.email}" required="true" label="Email" style="width:98%" />
+						<p:inputText id="emailPrestador" value="#{prestadorPessoaMB.prestador.email}" required="true" label="Email" style="width:98%" />
 					</p:column>
 					<p:column>
-						<p:outputLabel for="lotePessoaPrestadorId" value="Lote"  />
+						<p:outputLabel for="lotePessoaPrestadorId" value="Lote:"  />
 					</p:column >		
 					<p:column colspan="2">					
 						<p:selectOneMenu id="lotePessoaPrestadorId" value="#{prestadorPessoaMB.prestador.lote}" filter="true" filterMatchMode="contains" style="width:98%">
@@ -165,19 +166,19 @@
 				</p:row>
 				<p:row>
 					<p:column>
-						<h:outputText value="Horário de Entrada"  />
+						<p:outputLabel for="hentradaPrestador" value="Horário de Entrada:" />
 					</p:column>
 					<p:column colspan="2">
-						<p:calendar pattern="HH:mm" timeOnly="true"  value="#{prestadorPessoaMB.prestador.horaEntrada}" label="Horário de Entrada"  >
+						<p:calendar id="hentradaPrestador" pattern="HH:mm" timeOnly="true"  value="#{prestadorPessoaMB.prestador.horaEntrada}" label="Horário de Entrada"  >
 									
 						</p:calendar>
 					
 					</p:column>
 					<p:column>
-						<h:outputText value="Horário de Saída"  />
+						<p:outputLabel for="hsaidaPrestador" value="Horário de Saídaa:" />
 					</p:column>
 					<p:column colspan="2">
-						<p:calendar pattern="HH:mm" timeOnly="true"  value="#{prestadorPessoaMB.prestador.horaSaida}" label="Horário de Saída" >
+						<p:calendar id="hsaidaPrestador" pattern="HH:mm" timeOnly="true"  value="#{prestadorPessoaMB.prestador.horaSaida}" label="Horário de Saída" >
 									
 						</p:calendar>
 					</p:column>

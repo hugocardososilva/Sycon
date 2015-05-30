@@ -11,32 +11,32 @@
 <h:head>
 	<title>Condomínio</title>
 	<h:outputStylesheet library="css" name="main.css" />
-	<h:outputStylesheet library="bootstrap/css" name="bootstrap-theme.min.css" />
+	<h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </h:head>
 
 <h:body>
 	<f:view contentType="text/html; charset=UTF-8" encoding="UTF-8" >
-		<div class="container">
-			<div id="divTop" class="row">
+		<div class="container-fluid">
+			
 				
 				
-				<div class="col-md-12">
+				
 		
 			<ui:insert name="divTop">
 				<ui:include src="top.xhtml" />
 			</ui:insert>
-				</div>
-		</div>
+				
+		
 		<div class="row">
-		<div id="divLeft" class="col-md-4" >
+		<div id="divLeft" class="col-md-2" >
 			
 			<ui:insert name="divLeft">
 				<ui:include src="left.xhtml" />
 			</ui:insert>
 		</div>
 
-		<div id="divMain">
+		<div id= "divMain" class="col-md-10">
 			<p:growl id="messageGrowl" />
 			<ui:insert name="divMain" />
 		</div>
