@@ -11,11 +11,57 @@
 		
 		<h:form id="movimentacaoPrestadorForm">
 		
-			<p:panel styleClass="teste">
-				<p:panelGrid>
+			<p:panel >
+				<p:panelGrid columns="2">
+				<p:outputLabel for="senhaPrestadorServico" value="Senha:"/>
+				
+				<p:inputText id="senhaPrestadorServico" value="">
+				
+				</p:inputText>
 				
 				
 				</p:panelGrid>
+			
+			
+			</p:panel>
+			<p:panel>
+				<p:row>	
+					<p:column>
+						<p:outputLabel for="nomePrestador" value="Nome:" />   
+										
+						</p:column>
+						<p:column>
+							<p:inputText id="nomePrestador" value="#{prestadorPessoaMB.prestador.nome}" required="true" label="Nome" />
+						</p:column>
+					
+						<p:column>
+							<p:outputLabel for="sobrenomePrestador" value="Sobrenome:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="sobrenomePrestador" value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" />
+						</p:column>
+						
+				</p:row>
+				<p:row>	
+					<p:column>
+						<p:outputLabel for="funcaoPrestador" value="Função:" />   
+										
+						</p:column>
+						<p:column>
+							<p:dataList value="#{servicoMB.prestador.tipos}" var="tipo" >
+								#{tipo.tipo}
+							</p:dataList>
+						</p:column>
+					
+						<p:column>
+							<p:outputLabel for="sobrenomePrestador" value="Sobrenome:" />
+						</p:column>
+						<p:column>
+							<p:inputText id="sobrenomePrestador" value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" />
+						</p:column>
+						
+				</p:row>
+				
 			
 			
 			</p:panel>
