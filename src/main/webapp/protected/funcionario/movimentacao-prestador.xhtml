@@ -12,57 +12,108 @@
 		<h:form id="movimentacaoPrestadorForm">
 		
 			<p:panel >
-				<p:panelGrid columns="2">
+				<p:panelGrid columns="3">
 				<p:outputLabel for="senhaPrestadorServico" value="Senha:"/>
 				
-				<p:inputText id="senhaPrestadorServico" value="">
-				
+				<p:inputText id="senhaPrestadorServico" value="#{servicoMB.senha}">
+									
 				</p:inputText>
-				
+				<p:commandButton action="#{servicoMB.keyPressSenha}" value="Pesquisar" update=":movimentacaoPrestadorForm"></p:commandButton>
 				
 				</p:panelGrid>
 			
 			
 			</p:panel>
-			<p:panel>
+			<p:panel id="panelServicoPessoa" rendered="#{servicoMB.iniciarServico eq true}">
+			<p:panelGrid id="horaEntradaPanelGrid"  >
+				
+				<p:row>
+					<p:column >
+						<p:outputLabel for="horaEntradaIdClock" value="Horário de entrada:"/>
+						
+					</p:column>
+					
+					<p:column>
+						
+						<p:clock id="horaEntradaIdClock" mode="server"></p:clock>
+					
+					</p:column>
+				</p:row>
+			</p:panelGrid>	
+			<p:panelGrid>
+			
+			
 				<p:row>	
+				
 					<p:column>
 						<p:outputLabel for="nomePrestador" value="Nome:" />   
 										
 						</p:column>
 						<p:column>
-							<p:inputText id="nomePrestador" value="#{prestadorPessoaMB.prestador.nome}" required="true" label="Nome" />
+							<p:inputText disabled="true" id="nomePrestador" value="#{prestadorPessoaMB.prestador.nome}" required="true" label="Nome" size="30" />
 						</p:column>
 					
 						<p:column>
 							<p:outputLabel for="sobrenomePrestador" value="Sobrenome:" />
 						</p:column>
 						<p:column>
-							<p:inputText id="sobrenomePrestador" value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" />
+							<p:inputText disabled="true" id="sobrenomePrestador" value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" size="40" />
+						</p:column>
+						<p:column rowspan="4">
+							<p:graphicImage value="/../sysconImages/#{servicoMB.prestador.foto}.jpeg" width="150px" height="180px"/>
 						</p:column>
 						
 				</p:row>
+				
 				<p:row>	
 					<p:column>
 						<p:outputLabel for="funcaoPrestador" value="Função:" />   
 										
 						</p:column>
-						<p:column>
-							<p:dataList value="#{servicoMB.prestador.tipos}" var="tipo" >
+						<p:column colspan="3">
+							<p:dataList emptyMessage="Nenhuma função associada" id="funcaoPrestador" value="#{servicoMB.prestador.tipos}" var="tipo" >
 								#{tipo.tipo}
 							</p:dataList>
 						</p:column>
 					
-						<p:column>
-							<p:outputLabel for="sobrenomePrestador" value="Sobrenome:" />
-						</p:column>
-						<p:column>
-							<p:inputText id="sobrenomePrestador" value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" />
-						</p:column>
 						
 				</p:row>
+				<p:row>	
 				
-			
+					<p:column>
+						<p:outputLabel for="lotePrestador" value="Lote:" />   
+										
+						</p:column>
+						<p:column colspan="3">
+							<p:inputText disabled="true" id="lotePrestador" value="Quadra: #{prestadorPessoaMB.prestador.lote.numero} Nº: #{prestadorPessoaMB.prestador.lote.numero} " style="width:100%" />
+						</p:column>
+					</p:row>
+					
+					<p:row>	
+				
+					<p:column>
+						<p:outputLabel for="horarioDeTrabalho" value="Horário de trabalho previsto:" />   
+										
+						</p:column>
+						<p:column>
+							<p:inputText disabled="true" id="horarioDeTrabalho" value="#{servicoMB.prestador.horaEntrada} às #{servicoMB.prestador.horaSaida} " style="width:100%" >
+							</p:inputText>
+						</p:column>
+						
+					</p:row>
+					
+					<p:row>
+						<p:column>
+							<p:outputLabel for="observacoesServico" value="Observações:"/>
+						</p:column>
+						<p:column colspan="3" >
+							<p:inputTextarea id="observacoesServico" value="#{servicoMB.servico.observacoes}" rows="3" cols="95"></p:inputTextarea>
+						</p:column>
+					</p:row>
+					
+				
+			</p:panelGrid>
+				
 			
 			</p:panel>
 		
