@@ -12,8 +12,13 @@
 		<h:form id="lotes">
 		
 			<p:panel>
+			
+			
+			
+			<p:commandButton icon="fa fa-plus" styleClass="btn btn-success btn-lg" value="Novo"  onclick="PF('novoLoteWidiget').show();" update=":lotes"/>
+			</p:panel>
 	
-			<p:commandButton icon="fa fa-plus"  styleClass="ui-priority-primary"  action="#{lotesMB.novoLote}"/>
+			<p:panel>
 			
 			<p:spacer width="20" height="20px"/>
 		
@@ -21,17 +26,20 @@
 			paginator="true" rows="20" widgetVar="loteWidget" filteredValue="#{lotesMB.lotesFiltrado}">
 			 
 			 
-				<p:column headerText="Id" filterBy="#{lote.id}" width="150" >
+				<p:column headerText="Id" filterBy="#{lote.id}"  width="150" >
        				 <h:outputText value="#{lote.id}" />
     			</p:column>
-    			<p:column headerText="Número">
+    			<p:column headerText="Número" filterBy="#{lote.numero}">
        				 <h:outputText value="#{lote.numero}" />
     			</p:column>
-    			<p:column headerText="Quadra">
-       				 <h:outputText value="#{lote.quadra}" />
+    			<p:column headerText="Quadra" filterBy="#{lote.quadra}" >
+       				 <h:outputText  value="#{lote.quadra}" />
     			</p:column>
-    			<p:column headerText="Responsável">
+    			<p:column headerText="Responsável" filterBy="#{lote.responsavel.nome}">
        				 <h:outputText value="#{lote.responsavel.id} #{lote.responsavel.nome}"   />
+    			</p:column>
+    			<p:column headerText="Ações">
+    			
     			</p:column>
 			
 			</p:dataTable>
@@ -39,7 +47,7 @@
 			</p:panel>
 		
 		</h:form>
-		
+		<ui:include src="/protected/funcionario/dialogs/novo-lote.xhtml"/>
 		
 		</ui:define>
 		<ui:define name="divLeft">

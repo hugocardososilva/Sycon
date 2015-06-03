@@ -25,16 +25,16 @@ public class Lote implements GenericInterface{
 	private Long numero;
 	private String quadra;
 	
-	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@ManyToOne(cascade= CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private Inquilino responsavel;
 	
-	@OneToMany(mappedBy="residencia",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(cascade= CascadeType.ALL, mappedBy="residencia",fetch=FetchType.LAZY)
 	private List<Inquilino> moradores;
 	
-	@OneToMany(mappedBy="lote", cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(cascade= CascadeType.ALL, mappedBy="lote", fetch=FetchType.LAZY)
 	private List<Pessoa> frequentes;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY)
 	@OrderBy("horaEntrada DESC")
 	private List<Servico> servicos;
 	
@@ -43,6 +43,8 @@ public class Lote implements GenericInterface{
 		this.moradores= new ArrayList<Inquilino>();
 		this.frequentes= new ArrayList<Pessoa>();
 		this.servicos= new ArrayList<Servico>();
+		this.responsavel= new Inquilino();
+		
 	}
 
 

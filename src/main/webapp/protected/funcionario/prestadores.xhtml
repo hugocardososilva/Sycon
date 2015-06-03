@@ -15,32 +15,34 @@
 			
 			<p:panel id="prestadoresGrupoBotoes">
 			
-			<p:commandButton value="Novo" action="#{prestadorPessoaMB.novoPrestador}" icon="fa fa-plus"  styleClass="ui-priority-primary"  />
+			<p:commandButton value="Novo" action="#{prestadorPessoaMB.novoPrestador}" icon="fa fa-plus"  styleClass="btn btn-success btn-lg"  />
 			
 			</p:panel>
 			
 			<p:panel>
+			<p:spacer width="20" height="20px"/>
 			<p:dataTable id="prestadoresDataTable" var="prestador" value="#{prestadorPessoaMB.pessoas}"
 			emptyMessage="Não existem registros" rows="5" paginator="true">
 				<f:facet name="heaer">
 					<h:outputText value="Prestadores"/>
 				</f:facet>
 				
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" filterBy="#{prestador.nome}">
 					<h:outputText value="#{prestador.nome}"/>
 				</p:column>
-				<p:column headerText="Sobrenome">
+				<p:column headerText="Sobrenome" filterBy="#{prestador.sobrenome}">
 					<h:outputText value="#{prestador.sobrenome}"/>
 				</p:column>
-				<p:column headerText="CPF">
+				<p:column headerText="CPF" filterBy="#{prestador.cpf}">
 					<h:outputText value="#{prestador.cpf}"/>
 				</p:column>
 				<p:column headerText="Bloqueado">
 					<h:outputText value="#{prestador.bloqueado}"/>
 				</p:column>
-				<p:column headerText="Opções">
-					<p:commandButton icon="fa fa-search-plus" action="#{prestadorPessoaMB.visualizarPrestador}" update=":prestadores" styleClass="ui-priority-primary"/>
-					<p:commandButton icon="fa fa-ban" styleClass="ui-state-error" action="#{prestadorPessoaMB.bloquearPrestador}" update=":prestadores"/>
+				<p:column headerText="Ações">
+				
+					<p:commandButton icon="fa fa-search-plus"  value="Visualizar" action="#{prestadorPessoaMB.visualizarPrestador}" update=":prestadores" styleClass="btn btn-info"/>
+					<p:commandButton icon="fa fa-ban"  styleClass="btn btn-warning" value="Bloquear" action="#{prestadorPessoaMB.bloquearPrestador}" update=":prestadores"/>
 				</p:column>
 				
 			

@@ -95,7 +95,7 @@ public class ServicoMB extends AbstractMB {
 		public void keyPressSenha(){
 			System.out.println("digitou");
 			this.iniciarServico= true;
-//			displayInfoMessageToUser("senha digitada: " + senha.toString());
+			displayInfoMessageToUser("senha digitada: " + senha.toString());
 			
 			
 			

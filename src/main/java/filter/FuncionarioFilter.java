@@ -17,7 +17,7 @@ import model.Usuario;
 /**
  * Servlet Filter implementation class FuncionarioFilter
  */
-@WebFilter("/protected/funcionario/*")
+//@WebFilter("/protected/funcionario/*")
 public class FuncionarioFilter extends AbstractFilter implements Filter {
 
     /**

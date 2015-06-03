@@ -1,5 +1,8 @@
 package mb;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import org.primefaces.context.RequestContext;
 
 
@@ -12,13 +15,17 @@ public class AbstractMB {
 	}
 
 	protected void displayErrorMessageToUser(String message) {
-		JSFMessageUtil messageUtil = new JSFMessageUtil();
-		messageUtil.sendErrorMessageToUser(message);
+		
+		FacesMessage messagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro:", message);  
+        
+        FacesContext.getCurrentInstance().addMessage(null, messagem);  
 	}
 	
 	protected void displayInfoMessageToUser(String message) {
-		JSFMessageUtil messageUtil = new JSFMessageUtil();
-		messageUtil.sendInfoMessageToUser(message);
+		
+			FacesMessage messagem = new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação:", message);  
+        
+        FacesContext.getCurrentInstance().addMessage(null, messagem); 
 	}
 	
 	protected void closeDialog(){

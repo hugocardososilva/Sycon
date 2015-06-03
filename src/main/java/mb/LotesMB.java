@@ -10,13 +10,15 @@ import javax.faces.bean.ViewScoped;
 import org.eclipse.persistence.annotations.Property;
 
 import dao.DAOLote;
+import model.Inquilino;
 import model.Lote;
 
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 public class LotesMB extends AbstractMB {
 	private List<Lote> lotes;
 	private List<Lote> lotesFiltrado;
+	private List<Inquilino> inquilinos;
 	
 	private Lote lote;
 	private DAOLote dao= new DAOLote();
@@ -24,6 +26,7 @@ public class LotesMB extends AbstractMB {
 	
 	public LotesMB() {
 		this.lotes= new ArrayList<Lote>();
+		this.inquilinos= new ArrayList<Inquilino>();
 		
 		
 	}
@@ -44,6 +47,14 @@ public class LotesMB extends AbstractMB {
 	}
 	
 
+	public List<Inquilino> getInquilinos() {
+		return inquilinos;
+	}
+
+	public void setInquilinos(List<Inquilino> inquilinos) {
+		this.inquilinos = inquilinos;
+	}
+
 	public List<Lote> getLotesFiltrado() {
 		return lotesFiltrado;
 	}
@@ -62,7 +73,7 @@ public class LotesMB extends AbstractMB {
 	
 	public String redirectLotes(){
 		resetLote();
-		return "lotes.xhtml";
+		return "lotes.xhtml?faces-redirect=true";
 	}
 	public String salvarLote(){
 		dao.open();

@@ -50,14 +50,14 @@ public class LoginMB extends AbstractMB {
 		Usuario usuario= (Usuario) req.getSession().getAttribute("user");
 		System.out.println("classe do usuario  "+ usuario.getClass());
 		if(user.getClass()== Funcionario.class){
-			return "/protected/funcionario/index.xhtml";
+			return "/protected/funcionario/index.xhtml?faces-redirect=true";
 		
 			}else
 				if(user.getClass()== Inquilino.class){
 					return "/protected/inquilino/index.xhtml";
 				
 				}else{
-					return "/login.xhtml";
+					return "/login.xhtml?faces-redirect=true";
 				}
 		
 	
@@ -81,13 +81,13 @@ public class LoginMB extends AbstractMB {
 			System.out.println(user.getClass() +  "  classe do tipo");
 			
 			if(user.getClass()== Funcionario.class){
-				return "/protected/funcionario/index.xhtml";
+				return "/protected/funcionario/index.xhtml?faces-redirect=true";
 			
 				}else
 					if(user.getClass()== Inquilino.class){
-						return "/protected/inquilino/index.xhtml";
+						return "/protected/inquilino/index.xhtml?faces-redirect=true";
 					}else{
-						return "/login.xhtml";
+						return "/login.xhtml?faces-redirect=true";
 					}
 			
 		}
