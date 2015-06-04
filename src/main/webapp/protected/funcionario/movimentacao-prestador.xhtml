@@ -15,31 +15,88 @@
 				<p:panelGrid columns="3">
 				<p:outputLabel for="senhaPrestadorServico" value="Senha:"/>
 				
-				<p:inputText id="senhaPrestadorServico" value="#{servicoMB.senha}">
+				<p:inputText id="senhaPrestadorServico" value="#{servicoPrestadorMB.senha}">
 									
 				</p:inputText>
-				<p:commandButton action="#{servicoMB.keyPressSenha}" value="Pesquisar" update=":movimentacaoPrestadorForm"></p:commandButton>
+				<p:commandButton icon="fa fa-search" action="#{servicoPrestadorMB.keyPressSenha}" styleClass="btn btn-primary" update=":movimentacaoPrestadorForm"/>
 				
 				</p:panelGrid>
 			
 			
 			</p:panel>
-			<p:panel id="panelServicoPessoa" rendered="#{servicoMB.iniciarServico eq true}">
-			<p:panelGrid id="horaEntradaPanelGrid"  >
+			<p:panel id="panelServicoPessoa" rendered="#{servicoPrestadorMB.iniciarServico eq true}">
+			
+			<p:panelGrid id="horaEntradaPanelGrid" rendered="#{servicoPrestadorMB.entrou eq true}"  >
 				
-				<p:row>
+				<p:row >
 					<p:column >
-						<p:outputLabel for="horaEntradaIdClock" value="Horário de entrada:"/>
+						<p:outputLabel for="horaEntradaIdClock" value="Horário de entrada:" />
 						
 					</p:column>
 					
 					<p:column>
-						
+							<div class="clock">
 						<p:clock id="horaEntradaIdClock" mode="server"></p:clock>
-					
+							</div>
+					</p:column>
+					<p:column>
+						<p:commandButton icon="fa fa-clock-o" styleClass="btn btn-success btn-lg" action="#{servicoPrestadorMB.registrarEntrada}" value="Registrar Entrada" update="movimentacaoPrestadorForm"></p:commandButton>
 					</p:column>
 				</p:row>
 			</p:panelGrid>	
+			<p:panelGrid id="horaSaidaPanelGrid" rendered="#{servicoPrestadorMB.saiu eq true}"  >
+				
+				<p:row >
+					<p:column >
+						<p:outputLabel for="horaSaidaIdClock" value="Horário de Saída:" />
+						
+					</p:column>
+					
+					<p:column>
+						<div class="clock">
+						<p:clock id="horaSaidaIdClock" mode="server"></p:clock>
+						</div>
+					</p:column>
+					<p:column>
+						<p:commandButton icon="fa fa-clock-o" styleClass="btn btn-success btn-lg" action="#{servicoPrestadorMB.registrarSaida}" value="Registrar Saida" update="movimentacaoPrestadorForm"></p:commandButton>
+					</p:column>
+				</p:row>
+			</p:panelGrid>	
+			<p:spacer height="20px"></p:spacer>
+			<p:panelGrid id="resumoEntrdaPanelGrid" rendered="#{servicoPrestadorMB.saiu eq true}"  >
+				<f:facet name="header">
+					<p:column styleClass="panel panel-info" colspan="4">Resumo de Entrada </p:column>
+				
+				</f:facet>
+					
+					<p:row>
+						<p:column>
+							<p:outputLabel for="resumoDataEntrada" value="Data de Entrada:"/>
+						</p:column>
+						<p:column>
+						<h4>
+							<h:outputText id="resumoDataEntrada" value="#{servicoPrestadorMB.servico.dataEntrada}">
+							<f:convertDateTime pattern="dd/MM/yyyy"/>
+							</h:outputText>
+						</h4>
+						</p:column>
+					
+					
+					
+						<p:column>
+							<p:outputLabel for="resumoHoraEntrada" value="Hora de Entrada:"/>
+						</p:column>
+						<p:column>
+						<h4>
+							<h:outputText id="resumoHoraEntrada" value="#{servicoPrestadorMB.servico.dataEntrada}">
+							<f:convertDateTime timeZone="Etc/GMT+3" type="time"/>
+							</h:outputText>
+						</h4>
+						</p:column>
+					
+					
+					</p:row>
+				</p:panelGrid>
 			<p:panelGrid>
 			
 			
@@ -50,17 +107,17 @@
 										
 						</p:column>
 						<p:column>
-							<p:inputText disabled="true" id="nomePrestador" value="#{prestadorPessoaMB.prestador.nome}" required="true" label="Nome" size="30" />
+							<p:inputText disabled="true" id="nomePrestador" value="#{prestadorPessoaMB.prestador.nome}" label="Nome" size="30" />
 						</p:column>
 					
 						<p:column>
 							<p:outputLabel for="sobrenomePrestador" value="Sobrenome:" />
 						</p:column>
 						<p:column>
-							<p:inputText disabled="true" id="sobrenomePrestador" value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" size="40" />
+							<p:inputText disabled="true" id="sobrenomePrestador" value="#{prestadorPessoaMB.prestador.sobrenome}" label="Sobrenome" size="40" />
 						</p:column>
 						<p:column rowspan="4">
-							<p:graphicImage value="/../sysconImages/#{servicoMB.prestador.foto}.jpeg" width="150px" height="180px"/>
+							<p:graphicImage value="/../sysconImages/#{servicoPrestadorMB.prestador.foto}.jpeg" width="150px" height="180px"/>
 						</p:column>
 						
 				</p:row>
@@ -71,7 +128,7 @@
 										
 						</p:column>
 						<p:column colspan="3">
-							<p:dataList emptyMessage="Nenhuma função associada" id="funcaoPrestador" value="#{servicoMB.prestador.tipos}" var="tipo" >
+							<p:dataList emptyMessage="Nenhuma função associada" id="funcaoPrestador" value="#{servicoPrestadorMB.prestador.tipos}" var="tipo" >
 								#{tipo.tipo}
 							</p:dataList>
 						</p:column>
@@ -96,7 +153,7 @@
 										
 						</p:column>
 						<p:column>
-							<p:inputText disabled="true" id="horarioDeTrabalho" value="#{servicoMB.prestador.horaEntrada} às #{servicoMB.prestador.horaSaida} " style="width:100%" >
+							<p:inputText disabled="true" id="horarioDeTrabalho" value="#{servicoPrestadorMB.prestador.horaEntrada} às #{servicoPrestadorMB.prestador.horaSaida} " style="width:100%" >
 							</p:inputText>
 						</p:column>
 						
@@ -107,12 +164,13 @@
 							<p:outputLabel for="observacoesServico" value="Observações:"/>
 						</p:column>
 						<p:column colspan="3" >
-							<p:inputTextarea id="observacoesServico" value="#{servicoMB.servico.observacoes}" rows="3" cols="95"></p:inputTextarea>
+							<p:inputTextarea id="observacoesServico" value="#{servicoPrestadorMB.servico.observacoes}" rows="3" cols="95"></p:inputTextarea>
 						</p:column>
 					</p:row>
 					
 				
 			</p:panelGrid>
+				
 				
 			
 			</p:panel>

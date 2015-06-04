@@ -43,4 +43,10 @@
 	float: left;
 	width: 290px;
 }
-
+.clock{
+	font-size: 125%;
+	font-family: Arial;
+}
+.ui-clock{
+	font-family: Lucida Console!important;
+}

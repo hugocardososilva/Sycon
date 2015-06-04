@@ -311,16 +311,17 @@ public class PrestadorPessoaMB  extends AbstractMB{
 	public void salvarPessoa(){
 		System.out.println("Adicionando novo prestador");
 		System.out.println("hora inicio  " + prestador.getHoraEntrada() );
-		dao.open();
-		dao.begin();
-		getNow();
-		
-		daotipo.merge(tipoServico);
-		prestador.setInformacao(informacao);
-		daoi.persist(informacao);
-		daop.persist(prestador);
-		
-		dao.commit();
+//		dao.open();
+//		dao.begin();
+//		getNow();
+//		
+//		daotipo.merge(tipoServico);
+//		prestador.setInformacao(informacao);
+//		daoi.persist(informacao);
+//		daop.persist(prestador);
+//		
+//		dao.commit();
+		displayInfoMessageToUser("Prestador adicionado com sucesso!");
 		this.editar= false;
 		this.novo= false;
 		

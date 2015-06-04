@@ -12,7 +12,7 @@
 	
 		
 		<h:form id="prestadores" modal="true">
-			
+			<h3>Gerenciar Prestadores</h3>
 			<p:panel id="prestadoresGrupoBotoes">
 			
 			<p:commandButton value="Novo" action="#{prestadorPessoaMB.novoPrestador}" icon="fa fa-plus"  styleClass="btn btn-success btn-lg"  />
@@ -41,8 +41,8 @@
 				</p:column>
 				<p:column headerText="Ações">
 				
-					<p:commandButton icon="fa fa-search-plus"  value="Visualizar" action="#{prestadorPessoaMB.visualizarPrestador}" update=":prestadores" styleClass="btn btn-info"/>
-					<p:commandButton icon="fa fa-ban"  styleClass="btn btn-warning" value="Bloquear" action="#{prestadorPessoaMB.bloquearPrestador}" update=":prestadores"/>
+					<p:commandButton icon="fa fa-search-plus"  value="Visualizar" action="#{prestadorPessoaMB.visualizarPrestador}" update=":prestadores" styleClass="btn btn-info btn-xs"/>
+					<p:commandButton icon="fa fa-ban"  styleClass="btn btn-warning btn-xs" value="Bloquear" action="#{prestadorPessoaMB.bloquearPrestador}" update=":prestadores"/>
 				</p:column>
 				
 			

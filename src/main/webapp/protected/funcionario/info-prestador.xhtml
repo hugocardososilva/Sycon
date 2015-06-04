@@ -12,7 +12,7 @@
 	
 		
 		<h:form id="prestadores" modal="true">
-		<p:messages autoUpdate="true"/>
+		
 		
 		
 			<p:panelGrid columns="3" >
@@ -214,7 +214,8 @@
 								
 							</p:column>
 							<p:column headerText="Opções" style="width:100px;">
-								<p:commandButton value="Adicionar Telefone" action="#{prestadorPessoaMB.novoPrestador}"/>
+								 <p:commandButton icon="fa fa-edit" styleClass="btn btn-warning" action="#{prestadorPessoaMB.novoPrestador}"/>
+								<p:commandButton icon="fa fa-remove" styleClass="btn btn-danger" action="#{prestadorPessoaMB.novoPrestador}"/>
 								
 							</p:column>
 							
@@ -240,7 +241,7 @@
 								
 							</p:column>
 							<p:column headerText="Opções" style="width:100px;">
-								<p:commandButton value="Remover" action="#{prestadorPessoaMB.removerTipoServico}" immediate="true" update=":prestadores:tipoServico" >
+								<p:commandButton styleClass="btn btn-danger" icon="fa fa-remove" action="#{prestadorPessoaMB.removerTipoServico}" immediate="true" update=":prestadores:tipoServico" >
 								<f:setPropertyActionListener value="#{tipo}" target="#{prestadorPessoaMB.tipoServico}"></f:setPropertyActionListener>
 								</p:commandButton>
 								
