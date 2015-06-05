@@ -55,7 +55,7 @@ public class LoginFilter extends AbstractFilter implements Filter {
 			}
 			Usuario user= (Usuario) session.getAttribute("user");
 			
-			if(user== null){
+			if(user == null){
 				doLogin(request, response, req);
 				return;
 			}

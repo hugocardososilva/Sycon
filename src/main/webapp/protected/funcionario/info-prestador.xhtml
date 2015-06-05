@@ -12,15 +12,23 @@
 	
 		
 		<h:form id="prestadores" modal="true">
-		
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"  icon="fa fa-check" styleClass="ui-confirmdialog-yes" />
+				<p:commandButton value="Não" type="button" icon="fa fa-close" styleClass="ui-confirmdialog-no"/>
+			
+			
+			</p:confirmDialog>
 		
 		
 			<p:panelGrid columns="3" >
 			<p:commandButton value="Salvar" action="#{prestadorPessoaMB.salvarPessoa}" update=":prestadores" icon="fa fa-save" styleClass="btn btn-success"/>
-			<p:commandButton icon="fa fa-paint-brush"  value="Limpar" actionListener="#{prestadorPessoaMB.limparPrestador}" immediate="true" process="@none"  update=":prestadores :prestadores:painelImagemGrid">
+			<p:commandButton icon="fa fa-eraser" styleClass="btn btn-info" value="Limpar" actionListener="#{prestadorPessoaMB.limparPrestador}" immediate="true" process="@none"  update=":prestadores :prestadores:painelImagemGrid">
 				<p:resetInput target="prestadores"></p:resetInput>
+				<p:confirm header="Confimarção" message="Deseja mesmo limpar?" icon="fa fa-warning"/>
 			</p:commandButton>
-			<p:commandButton icon="fa fa-close" value="Cancelar" action="#{prestadorPessoaMB.novoPrestador}" />
+			<p:commandButton icon="fa fa-close" immediate="true" styleClass="btn btn-warning"  value="Cancelar" action="#{prestadorPessoaMB.redirectPrestadores}" ajax="false">
+				<p:confirm header="Cancelar" message="Deseja mesmo cancelar?" icon="fa fa-warning" />
+			</p:commandButton>
 			
 			</p:panelGrid>
 			
@@ -60,7 +68,7 @@
 						<p:graphicImage value="/../sysconImages/#{prestadorPessoaMB.prestador.foto}.jpeg" width="150px" height="130px"/>
 					</p:column>
 					<p:column rowspan="3">
-							<p:commandButton icon="fa fa-camera" type="button" value="Capturar" onclick="PF('capturarImagemWidget').show();" update=":prestadores" rendered="#{empty prestadorPessoaMB.prestador.foto}"/>
+							<p:commandButton styleClass="btn btn-primary btn-lg" icon="fa fa-camera" type="button" value="Capturar" onclick="PF('capturarImagemWidget').show();" update=":prestadores" rendered="#{empty prestadorPessoaMB.prestador.foto}"/>
 									<p:commandButton value="Remover" onclick="PF('capturarImagemWidget').show();" update=":prestadores" rendered="#{not empty prestadorPessoaMB.prestador.foto}"/>
 					</p:column>
 					

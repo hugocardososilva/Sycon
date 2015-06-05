@@ -14,9 +14,10 @@ import model.Pessoa;
 import model.ServicoResidencia;
 
 @ManagedBean
-@ApplicationScoped
+@ViewScoped
 public class ServicoPrestadorMB extends AbstractMB {
 		private List<Pessoa> prestadores;
+		private List<ServicoResidencia> servicosEmAberto;
 		private DAOPrestadorPessoa daop= new DAOPrestadorPessoa();
 		private DAO dao = new DAO();
 		private String senha;
@@ -51,6 +52,32 @@ public class ServicoPrestadorMB extends AbstractMB {
 		
 		
 		
+		
+
+		public List<ServicoResidencia> getServicosEmAberto() {
+			return servicosEmAberto;
+		}
+
+		public void setServicosEmAberto(List<ServicoResidencia> servicosEmAberto) {
+			this.servicosEmAberto = servicosEmAberto;
+		}
+
+		public String getSenhaEntrada() {
+			return senhaEntrada;
+		}
+
+		public void setSenhaEntrada(String senhaEntrada) {
+			this.senhaEntrada = senhaEntrada;
+		}
+
+		public boolean isSaiu() {
+			return saiu;
+		}
+
+		public void setSaiu(boolean saiu) {
+			this.saiu = saiu;
+		}
+
 		public String getSenhaSaida() {
 			return senhaEntrada;
 		}

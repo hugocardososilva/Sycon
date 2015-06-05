@@ -229,7 +229,7 @@ public class PrestadorPessoaMB  extends AbstractMB{
 		resetPrestador();
 		this.editar= false;
 		this.novo= true;
-		return "info-prestador";
+		return "info-prestador?faces-redirect=true";
 		
 		
 	}

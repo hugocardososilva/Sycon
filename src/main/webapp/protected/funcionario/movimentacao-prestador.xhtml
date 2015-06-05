@@ -16,9 +16,12 @@
 				<p:outputLabel for="senhaPrestadorServico" value="Senha:"/>
 				
 				<p:inputText id="senhaPrestadorServico" value="#{servicoPrestadorMB.senha}">
-									
+					<f:validateRequired></f:validateRequired>				
 				</p:inputText>
-				<p:commandButton icon="fa fa-search" action="#{servicoPrestadorMB.keyPressSenha}" styleClass="btn btn-primary" update=":movimentacaoPrestadorForm"/>
+				<p:commandButton icon="fa fa-search" action="#{servicoPrestadorMB.keyPressSenha}" styleClass="btn btn-primary" update=":movimentacaoPrestadorForm">
+					
+					
+				</p:commandButton>
 				
 				</p:panelGrid>
 			
@@ -65,7 +68,7 @@
 			<p:spacer height="20px"></p:spacer>
 			<p:panelGrid id="resumoEntrdaPanelGrid" rendered="#{servicoPrestadorMB.saiu eq true}"  >
 				<f:facet name="header">
-					<p:column styleClass="panel panel-info" colspan="4">Resumo de Entrada </p:column>
+					<p:column  colspan="4">Resumo de Entrada </p:column>
 				
 				</f:facet>
 					

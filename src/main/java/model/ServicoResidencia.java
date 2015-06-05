@@ -7,19 +7,20 @@ import javax.persistence.ManyToOne;
 @Entity
 public class ServicoResidencia extends Servico {
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	private Pessoa frequente;
+	private Pessoa pessoa;
 	
 	public ServicoResidencia() {
 		super();
 	}
 
-	public Pessoa getFrequente() {
-		return frequente;
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
 
-	public void setFrequente(Pessoa frequente) {
-		this.frequente = frequente;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
-	
+
+
 	
 }
