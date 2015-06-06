@@ -10,17 +10,17 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 @Entity
-public class Inquilino extends Usuario {
+public class Morador extends Usuario {
 	private boolean responsavel;
 	
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	private Lote residencia;
+	private Lote lote;
 	
 	@OneToMany(mappedBy="responsavel",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<Lote> responsabilidade;
 	
 
-	public Inquilino() {
+	public Morador() {
 		super();
 		this.responsabilidade= new ArrayList<Lote>();
 	}
@@ -33,12 +33,13 @@ public class Inquilino extends Usuario {
 		this.responsavel = responsavel;
 	}
 
-	public Lote getResidencia() {
-		return residencia;
+	
+	public Lote getLote() {
+		return lote;
 	}
 
-	public void setResidencia(Lote residencia) {
-		this.residencia = residencia;
+	public void setLote(Lote lote) {
+		this.lote = lote;
 	}
 
 	public List<Lote> getResponsabilidade() {

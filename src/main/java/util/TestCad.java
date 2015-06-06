@@ -37,7 +37,7 @@ public class TestCad {
 	DAOTipoServico daot= new DAOTipoServico();
 	DAOPrestadorPessoa daop= new DAOPrestadorPessoa();
 	Pessoa p = new Pessoa();
-	p.setCpf(123123123132l);
+	p.setCpf("123123123132l");
 	p.setRg(123123123l);
 	p.setEmail("aishdaiuhd");
 	p.setSenha("12312312");

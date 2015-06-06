@@ -18,7 +18,7 @@ public class Pessoa extends Prestador{
 	private String sobrenome;
 	
 	@Column(unique=true)
-	private Long cpf;
+	private String cpf;
 	
 	@Column(unique= true)
 	private Long rg;
@@ -100,12 +100,15 @@ public class Pessoa extends Prestador{
 	}
 
 
-	public Long getCpf() {
+	
+
+
+	public String getCpf() {
 		return cpf;
 	}
 
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 

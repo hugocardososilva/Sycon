@@ -10,7 +10,7 @@ import javax.servlet.ServletContext;
 
 import org.primefaces.event.CaptureEvent;
 
-import model.Inquilino;
+import model.Morador;
 import model.Usuario;
 
 @ManagedBean
@@ -23,7 +23,7 @@ public class FuncionarioMB extends AbstractMB implements Serializable {
 	private Usuario user;
 	
 	public FuncionarioMB() {
-		user= new Inquilino();
+		user= new Morador();
 	}
 
 	public Usuario getUser() {

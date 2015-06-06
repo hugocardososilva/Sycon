@@ -11,7 +11,7 @@ import javax.servlet.ServletContext;
 
 import org.primefaces.event.CaptureEvent;
 
-import model.Inquilino;
+import model.Morador;
 import model.Usuario;
 
 @ManagedBean
@@ -28,7 +28,7 @@ public class InquilinoMB implements Serializable {
 	
 	
 	public InquilinoMB() {
-		user = new Inquilino();
+		user = new Morador();
 	}
 
 

@@ -9,7 +9,7 @@
 		<class>model.Empresa</class>
 		<class>model.Funcionario</class>
 		<class>model.Informacao</class>
-		<class>model.Inquilino</class>
+		<class>model.Morador</class>
 		<class>model.Lote</class>
 		<class>model.Ocorrencia</class>
 		<class>model.OcorrenciaPrestadorServico</class>

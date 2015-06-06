@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.DAOFacade;
 import model.Funcionario;
-import model.Inquilino;
+import model.Morador;
 import model.Usuario;
 
 @ManagedBean
@@ -53,7 +53,7 @@ public class LoginMB extends AbstractMB {
 			return "/protected/funcionario/index.xhtml?faces-redirect=true";
 		
 			}else
-				if(user.getClass()== Inquilino.class){
+				if(user.getClass()== Morador.class){
 					return "/protected/inquilino/index.xhtml";
 				
 				}else{
@@ -84,7 +84,7 @@ public class LoginMB extends AbstractMB {
 				return "/protected/funcionario/index.xhtml?faces-redirect=true";
 			
 				}else
-					if(user.getClass()== Inquilino.class){
+					if(user.getClass()== Morador.class){
 						return "/protected/inquilino/index.xhtml?faces-redirect=true";
 					}else{
 						return "/login.xhtml?faces-redirect=true";

@@ -26,13 +26,13 @@ public class Lote implements GenericInterface{
 	private String quadra;
 	
 	@ManyToOne(cascade= CascadeType.PERSIST, fetch=FetchType.EAGER)
-	private Inquilino responsavel;
+	private Morador responsavel;
 	
-	@OneToMany(cascade= CascadeType.ALL, mappedBy="residencia",fetch=FetchType.LAZY)
-	private List<Inquilino> moradores;
+	@OneToMany(cascade= CascadeType.ALL, mappedBy="lote",fetch=FetchType.LAZY)
+	private List<Morador> moradores;
 	
 	@OneToMany(cascade= CascadeType.ALL, mappedBy="lote", fetch=FetchType.LAZY)
-	private List<Pessoa> frequentes;
+	private List<Pessoa> pessoas;
 	
 	@OneToMany(fetch=FetchType.LAZY)
 	@OrderBy("horaEntrada DESC")
@@ -40,10 +40,10 @@ public class Lote implements GenericInterface{
 	
 	
 	public Lote() {
-		this.moradores= new ArrayList<Inquilino>();
-		this.frequentes= new ArrayList<Pessoa>();
+		this.moradores= new ArrayList<Morador>();
+		this.pessoas= new ArrayList<Pessoa>();
 		this.servicos= new ArrayList<Servico>();
-		this.responsavel= new Inquilino();
+		this.responsavel= new Morador();
 		
 	}
 
@@ -80,41 +80,44 @@ public class Lote implements GenericInterface{
 	}
 
 
-	public Inquilino getResponsavel() {
+	public Morador getResponsavel() {
 		return responsavel;
 	}
 
 
-	public void setResponsavel(Inquilino responsavel) {
+	public void setResponsavel(Morador responsavel) {
 		this.responsavel = responsavel;
 	}
 
 
-	public List<Inquilino> getMoradores() {
+	public List<Morador> getMoradores() {
 		return moradores;
 	}
 
 
-	public void setMoradores(List<Inquilino> moradores) {
+	public void setMoradores(List<Morador> moradores) {
 		this.moradores = moradores;
 	}
 
 
-	public List<Pessoa> getFrequentes() {
-		return frequentes;
-	}
-
-
-	public void setFrequentes(List<Pessoa> frequentes) {
-		this.frequentes = frequentes;
-	}
 	
-	public void addFrequente(Pessoa f){
-		this.frequentes.add(f);
+	
+	public List<Pessoa> getPessoas() {
+		return pessoas;
+	}
+
+
+	public void setPessoas(List<Pessoa> pessoas) {
+		this.pessoas = pessoas;
+	}
+
+
+	public void addPessoa(Pessoa p){
+		this.pessoas.add(p);
 		
 	}
-	public void removeFrequente(Pessoa f){
-		this.frequentes.remove(f);
+	public void removePessoa(Pessoa p){
+		this.pessoas.remove(p);
 	}
 
 	public List<Servico> getServicos() {
