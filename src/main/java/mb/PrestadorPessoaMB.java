@@ -6,14 +6,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.faces.bean.ApplicationScoped;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 
-import org.postgresql.util.PSQLException;
-import org.primefaces.component.calendar.Calendar;
+
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.CaptureEvent;
 
@@ -30,7 +30,7 @@ import model.Telefone;
 import model.TipoServico;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class PrestadorPessoaMB  extends AbstractMB{
 	private DAOPrestadorPessoa daop= new DAOPrestadorPessoa();
 	private DAO dao = new DAO();
@@ -53,8 +53,8 @@ public class PrestadorPessoaMB  extends AbstractMB{
 	
 	
 	public PrestadorPessoaMB() {
-		this.editar= false;
-		this.novo= false;
+		System.out.println("MB nasceu!!  "+this.toString() );
+		
 		this.lote= new Lote();
 		this.lotes = new ArrayList<Lote>();
 		this.telefone= new Telefone();
@@ -222,6 +222,8 @@ public class PrestadorPessoaMB  extends AbstractMB{
 	}
 	
 	public String redirectPrestadores(){
+		limparPrestador();
+		System.out.println("redirecionando para prestadore.xhtml");
 		return "prestadores?faces-redirect=true";
 	}
 	public String novoPrestador(){
@@ -229,7 +231,7 @@ public class PrestadorPessoaMB  extends AbstractMB{
 		resetPrestador();
 		this.editar= false;
 		this.novo= true;
-		return "info-prestador?faces-redirect=true";
+		return "info-prestador";
 		
 		
 	}
@@ -303,8 +305,9 @@ public class PrestadorPessoaMB  extends AbstractMB{
 		ServletContext ctx= (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
 		
 		String filename = imb.oncapture(ctx, cEvent);
-		System.out.println(filename);
-		this.prestador.setFoto(filename);
+		prestador.setFoto(filename);
+		System.out.println("imagem no prestador  " + prestador.getFoto());
+		
 		
 		
 	}
@@ -334,11 +337,21 @@ public class PrestadorPessoaMB  extends AbstractMB{
 		resetTelefone();
 		resetTipoServico();
 	}
-	public void visualizarPrestador(){
+	public String visualizarPrestador(){
+		
+		this.novo= false;
+		this.editar= false;
+		System.out.println(prestador.getNome());
+		displayInfoMessageToUser("visualizando prestador! = " +" novo : " + novo + "editar : " + editar );
+		return "info-prestador";
 		
 	}
 	public void bloquearPrestador(){
 		displayInfoMessageToUser("Prestador Bloqueado!");
+	}
+	public void habilitarEdicao(){
+		this.editar= true;
+		this.novo= false;
 	}
 	
 }

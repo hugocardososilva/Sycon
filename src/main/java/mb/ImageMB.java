@@ -2,6 +2,8 @@ package mb;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.faces.FacesException;
 import javax.faces.bean.ManagedBean;
@@ -19,7 +21,14 @@ public class ImageMB  {
 	
 	public String oncapture(ServletContext context, CaptureEvent captureEvent){
 		byte[] data = captureEvent.getData();
-		filename= getRandomImageName();
+		
+		filename= String.valueOf(System.nanoTime());
+		
+		
+		
+		
+		
+//		filename= getRandomImageName();
 		String nomeArquivo = "C:"+File.separator+"syscon"+File.separator + filename+".jpeg";
 //		String nomeArquivo = "/sysconImages" +File.separator + filename+".jpeg";
 //		user.setImagem(nomeArquivo);
@@ -50,7 +59,7 @@ public class ImageMB  {
 	 }
 	 
 	 public String getRandomImageName() {
-	        long i = (long) (Math.random() * 1000000000);
+	        long i = (long) (Math.random() * 1000000000000000000l);
 	         
 	        return String.valueOf(i);
 	    }

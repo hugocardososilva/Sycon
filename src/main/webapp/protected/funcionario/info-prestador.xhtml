@@ -11,7 +11,7 @@
 		
 	
 		
-		<h:form id="prestadores" modal="true">
+		<h:form id="prestadores" modal="true" >
 			<p:confirmDialog global="true">
 				<p:commandButton value="Sim" type="button"  icon="fa fa-check" styleClass="ui-confirmdialog-yes" />
 				<p:commandButton value="Não" type="button" icon="fa fa-close" styleClass="ui-confirmdialog-no"/>
@@ -19,10 +19,10 @@
 			
 			</p:confirmDialog>
 		
-		
-			<p:panelGrid columns="3" >
+			<p:panel>
+			<p:panelGrid columns="3" id="panelGrupoBotoesNovo" rendered="#{prestadorPessoaMB.novo eq true}" >
 			<p:commandButton value="Salvar" action="#{prestadorPessoaMB.salvarPessoa}" update=":prestadores" icon="fa fa-save" styleClass="btn btn-success"/>
-			<p:commandButton icon="fa fa-eraser" styleClass="btn btn-info" value="Limpar" actionListener="#{prestadorPessoaMB.limparPrestador}" immediate="true" process="@none"  update=":prestadores :prestadores:painelImagemGrid">
+			<p:commandButton icon="fa fa-eraser" styleClass="btn btn-info" value="Limpar" actionListener="#{prestadorPessoaMB.limparPrestador}" immediate="true"   update=":prestadores :prestadores:painelImagemGrid">
 				<p:resetInput target="prestadores"></p:resetInput>
 				<p:confirm header="Confimarção" message="Deseja mesmo limpar?" icon="fa fa-warning"/>
 			</p:commandButton>
@@ -30,12 +30,29 @@
 				<p:confirm header="Cancelar" message="Deseja mesmo cancelar?" icon="fa fa-warning" />
 			</p:commandButton>
 			
+			</p:panelGrid >
+			
+			
+			
+			<p:panelGrid columns="2" id="panelGrupoBotoesEditar" rendered= "#{prestadorPessoaMB.editar eq true}">
+				<p:commandButton value="Salvar" action="#{prestadorPessoaMB.salvarPessoa}" update=":prestadores" icon="fa fa-save" styleClass="btn btn-success"/>
+				
+				<p:commandButton icon="fa fa-close" immediate="true" styleClass="btn btn-warning"  value="Cancelar" action="#{prestadorPessoaMB.redirectPrestadores}" ajax="false">
+				<p:confirm header="Cancelar" message="Deseja mesmo cancelar?" icon="fa fa-warning" />
+				</p:commandButton>
+			
 			</p:panelGrid>
+			<p:panelGrid columns="2" rendered="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}">	
+				<p:commandButton value="Editar" icon="fa fa-edit" styleClass="btn btn-warning" actionListener="#{prestadorPessoaMB.habilitarEdicao}" update=":prestadores" immediate="true"/>
+				<p:commandButton value="Voltar" icon="fa fa-backward" styleClass="btn btn-info"  action="#{prestadorPessoaMB.redirectPrestadores}" update=":prestadores" immediate="true"/>
+				
+			</p:panelGrid>
+			</p:panel>
 			
 			<p:panel>
-				<p:panelGrid columns="2" id="painelImagemGrid" >
+				<p:panelGrid columns="3" id="painelImagemGrid" >
 						<h:outputText value="Bloqueado?" style=" color:red;"/>		
-						<p:selectBooleanButton id="value2" value="#{prestadorPessoaMB.prestador.bloqueado}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:260px;">
+						<p:selectBooleanButton id="value2" disabled="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.prestador.bloqueado}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:260px;">
          
       					  </p:selectBooleanButton>	
 									
@@ -51,7 +68,7 @@
 					</p:column>
 					<p:column>
 						<p:inputText id="senhaPrestador" value="#{prestadorPessoaMB.prestador.senha}" required="true" 
-									disabled="#{prestadorPessoaMB.editar== true or prestadorPessoaMB.novo == true ? false : false}" 
+									readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" 
 									label="Senha" >
 									<f:validateLength minimum="6" maximum="6"/>
 									</p:inputText>
@@ -61,48 +78,48 @@
 												
 					</p:column>
 					<p:column>
-							<p:inputText id="cpfPrestador" value="#{prestadorPessoaMB.prestador.cpf}" required="true" label="CPF" />			
+							<p:inputText id="cpfPrestador" value="#{prestadorPessoaMB.prestador.cpf}" required="true" label="CPF" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" />			
 					</p:column>
 					
 					<p:column rowspan="3">
 						<p:graphicImage value="/../sysconImages/#{prestadorPessoaMB.prestador.foto}.jpeg" width="150px" height="130px"/>
 					</p:column>
 					<p:column rowspan="3">
-							<p:commandButton styleClass="btn btn-primary btn-lg" icon="fa fa-camera" type="button" value="Capturar" onclick="PF('capturarImagemWidget').show();" update=":prestadores" rendered="#{empty prestadorPessoaMB.prestador.foto}"/>
-									<p:commandButton value="Remover" onclick="PF('capturarImagemWidget').show();" update=":prestadores" rendered="#{not empty prestadorPessoaMB.prestador.foto}"/>
+							<p:commandButton disabled="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" styleClass="btn btn-primary btn-lg" icon="fa fa-camera" type="button" value="Capturar" onclick="PF('capturarImagemWidget').show();" update=":prestadores" rendered="#{empty prestadorPessoaMB.prestador.foto}"/>
+									<p:commandButton disabled="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="Remover" process="@none" onclick="PF('capturarImagemWidget').show();" update=":prestadores" rendered="#{not empty prestadorPessoaMB.prestador.foto}"/>
 					</p:column>
 					
 				</p:row>	
 				<p:row>
 					<p:column>
-					<p:outputLabel for="nomePrestador" value="Nome:" />   
+					<p:outputLabel for="nomePrestador" value="Nome:"  />   
 									
 					</p:column>
 					<p:column>
-						<p:inputText id="nomePrestador" value="#{prestadorPessoaMB.prestador.nome}" required="true" label="Nome" />
+						<p:inputText id="nomePrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.prestador.nome}" required="true" label="Nome" />
 					</p:column>
 				
 					<p:column>
-						<p:outputLabel for="sobrenomePrestador" value="Sobrenome:" />
+						<p:outputLabel for="sobrenomePrestador" value="Sobrenome:"  />
 					</p:column>
 					<p:column>
-						<p:inputText id="sobrenomePrestador" value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" />
+						<p:inputText id="sobrenomePrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.prestador.sobrenome}" required="true" label="Sobrenome" />
 					</p:column>
 					
 					
 				</p:row>
 				<p:row>
 					<p:column>
-						<p:outputLabel for="rgPrestador" value="RG:" />
+						<p:outputLabel for="rgPrestador" value="RG:"  />
 					</p:column>
 					<p:column>
-						<p:inputText id="rgPrestador" value="#{prestadorPessoaMB.prestador.rg}" required="true" label="RG" />
+						<p:inputText id="rgPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.prestador.rg}" required="true" label="RG" />
 					</p:column>
 					<p:column>
 						<p:outputLabel for="orgaoPrestador" value="Órgão Expeditor:" />
 					</p:column>
 					<p:column>
-						<p:inputText id="orgaoPrestador" value="#{prestadorPessoaMB.prestador.orgaoExpeditor}" label="Órgão Expeditor" />
+						<p:inputText id="orgaoPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.prestador.orgaoExpeditor}" label="Órgão Expeditor" />
 					</p:column>
 				</p:row>
 				<p:row>
@@ -110,13 +127,13 @@
 						<p:outputLabel for="enderecoPrestador" value="Endereço:" />
 					</p:column>
 					<p:column colspan="3">
-						<p:inputText id="enderecoPrestador" value="#{prestadorPessoaMB.informacao.endereco}" required="true" label="Endereco" style="width:98%" />	
+						<p:inputText id="enderecoPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.informacao.endereco}" required="true" label="Endereco" style="width:98%" />	
 					</p:column >
 					<p:column>
 						<p:outputLabel for="numeroPrestador" value="Número:" />	
 					</p:column>
 					<p:column>
-						<p:inputText id="numeroPrestador" value="#{prestadorPessoaMB.informacao.numero}" label="Numero" style="width:98%" />		
+						<p:inputText id="numeroPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.informacao.numero}" label="Numero" style="width:98%" />		
 					</p:column>
 				</p:row>
 				<p:row>
@@ -124,13 +141,13 @@
 						<p:outputLabel for="bairroPrestador" value="Bairro:" />	
 					</p:column>
 					<p:column colspan="2">
-						<p:inputText id="bairroPrestador" value="#{prestadorPessoaMB.informacao.bairro}"  label="Bairro" style="width:98%"/>
+						<p:inputText id="bairroPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.informacao.bairro}"  label="Bairro" style="width:98%"/>
 					</p:column>
 					<p:column>
 						<p:outputLabel for="complementoPrestador" value="Complemento:" />
 					</p:column>
 					<p:column colspan="2">
-						<p:inputText id="complementoPrestador" value="#{prestadorPessoaMB.informacao.complemento}"  label="Complemento" style="width:98%"/>
+						<p:inputText id="complementoPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.informacao.complemento}"  label="Complemento" style="width:98%"/>
 					</p:column>
 				
 				</p:row>
@@ -139,19 +156,19 @@
 						<p:outputLabel for="cidadePrestador" value="Cidade:" />
 					</p:column>
 					<p:column>
-						<p:inputText id="cidadePrestador" value="#{prestadorPessoaMB.informacao.cidade}" label="Cidade" />
+						<p:inputText id="cidadePrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.informacao.cidade}" label="Cidade" />
 					</p:column>
 					<p:column>
-						<p:outputLabel for="estadoPrestador" value="Estado:" />
+						<p:outputLabel for="estadoPrestador"  value="Estado:" />
 					</p:column>
 					<p:column>
-						<p:inputText id="estadoPrestador" value="#{prestadorPessoaMB.informacao.estado}"  label="Estado" maxlength="2" size="2" />
+						<p:inputText id="estadoPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.informacao.estado}"  label="Estado" maxlength="2" size="2" />
 					</p:column>
 					<p:column>
-						<p:outputLabel for="cepPrestador" value="CEP:" />
+						<p:outputLabel for="cepPrestador"  value="CEP:" />
 					</p:column>
 					<p:column>
-						<p:inputText id="cepPrestador" value="#{prestadorPessoaMB.informacao.cep}" label="CEP" style="width:98%"  />
+						<p:inputText id="cepPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.informacao.cep}" label="CEP" style="width:98%"  />
 					</p:column>
 				</p:row>
 				<p:row>
@@ -159,13 +176,13 @@
 						<p:outputLabel for="emailPrestador" value="Email:" />
 					</p:column>
 					<p:column colspan="2">
-						<p:inputText id="emailPrestador" value="#{prestadorPessoaMB.prestador.email}" required="true" label="Email" style="width:98%" />
+						<p:inputText id="emailPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" value="#{prestadorPessoaMB.prestador.email}" required="true" label="Email" style="width:98%" />
 					</p:column>
 					<p:column>
 						<p:outputLabel for="lotePessoaPrestadorId" value="Lote:"  />
 					</p:column >		
 					<p:column colspan="2">					
-						<p:selectOneMenu id="lotePessoaPrestadorId" value="#{prestadorPessoaMB.prestador.lote}" filter="true" filterMatchMode="contains" style="width:98%">
+						<p:selectOneMenu disabled="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" id="lotePessoaPrestadorId" value="#{prestadorPessoaMB.prestador.lote}" filter="true" filterMatchMode="contains" style="width:98%">
 							 <f:selectItem itemLabel="Condomínio" itemValue="" />
 							 <f:selectItems value="#{prestadorPessoaMB.lotes}"  var="lote" itemLabel="Lote #{lote.numero} Quadra #{lote.quadra} " itemValue="#{lote}"  />									
 						</p:selectOneMenu>									
@@ -177,7 +194,7 @@
 						<p:outputLabel for="hentradaPrestador" value="Horário de Entrada:" />
 					</p:column>
 					<p:column colspan="2">
-						<p:calendar id="hentradaPrestador" pattern="HH:mm" timeOnly="true"  value="#{prestadorPessoaMB.prestador.horaEntrada}" label="Horário de Entrada"  >
+						<p:calendar id="hentradaPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" pattern="HH:mm" timeOnly="true"  value="#{prestadorPessoaMB.prestador.horaEntrada}" label="Horário de Entrada"  >
 									
 						</p:calendar>
 					
@@ -186,7 +203,7 @@
 						<p:outputLabel for="hsaidaPrestador" value="Horário de Saídaa:" />
 					</p:column>
 					<p:column colspan="2">
-						<p:calendar id="hsaidaPrestador" pattern="HH:mm" timeOnly="true"  value="#{prestadorPessoaMB.prestador.horaSaida}" label="Horário de Saída" >
+						<p:calendar id="hsaidaPrestador" readonly="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" pattern="HH:mm" timeOnly="true"  value="#{prestadorPessoaMB.prestador.horaSaida}" label="Horário de Saída" >
 									
 						</p:calendar>
 					</p:column>
@@ -200,11 +217,11 @@
 					</p:panel>			
 					<p:panel id="telPessoa" toggleable="true" header="Telefones" style="margin-bottom:20px">
 						<p:panelGrid columns="2">
-							<p:dataTable id="telefonesPessoa" var="tel" value="#{prestadorPessoaMB.prestador.telefones}"
+							<p:dataTable  id="telefonesPessoa" var="tel" value="#{prestadorPessoaMB.prestador.telefones}"
 							emptyMessage="Não existem registros" rows="5" paginator="true">
 							<f:facet name="header">
 								 <p:outputPanel style="float:left;">
-								 		<p:commandButton icon="fa fa-plus" type="button"  onclick="PF('novoTelefoneWidiget').show();" update=":novoTelefonePessoaForm" styleClass="btn btn-success btn-lg" />
+								 		<p:commandButton icon="fa fa-plus" type="button"  disabled="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" onclick="PF('novoTelefoneWidiget').show();" update=":novoTelefonePessoaForm" styleClass="btn btn-success btn-lg" />
 								 		
 								 </p:outputPanel>
 							</f:facet>
@@ -222,8 +239,8 @@
 								
 							</p:column>
 							<p:column headerText="Opções" style="width:100px;">
-								 <p:commandButton icon="fa fa-edit" styleClass="btn btn-warning" action="#{prestadorPessoaMB.novoPrestador}"/>
-								<p:commandButton icon="fa fa-remove" styleClass="btn btn-danger" action="#{prestadorPessoaMB.novoPrestador}"/>
+								 <p:commandButton icon="fa fa-edit" disabled="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" styleClass="btn btn-warning" action="#{prestadorPessoaMB.novoPrestador}"/>
+								<p:commandButton icon="fa fa-remove" disabled="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" styleClass="btn btn-danger" action="#{prestadorPessoaMB.novoPrestador}"/>
 								
 							</p:column>
 							
@@ -236,7 +253,7 @@
 							emptyMessage="Não existem registros" rows="5" paginator="true">
 							<f:facet name="header">
 								 <p:outputPanel style="float:left;">
-								 		<p:commandButton  icon="fa fa-plus" type="button"  onclick="PF('tipoServicoPessoaWidget').show();" update=":tipoServicoPrestadorForm" styleClass="btn btn-success btn-lg" />
+								 		<p:commandButton  icon="fa fa-plus" disabled="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" type="button"  onclick="PF('tipoServicoPessoaWidget').show();" update=":tipoServicoPrestadorForm" styleClass="btn btn-success btn-lg" />
 								 </p:outputPanel>
 							</f:facet>
 							
@@ -249,7 +266,7 @@
 								
 							</p:column>
 							<p:column headerText="Opções" style="width:100px;">
-								<p:commandButton styleClass="btn btn-danger" icon="fa fa-remove" action="#{prestadorPessoaMB.removerTipoServico}" immediate="true" update=":prestadores:tipoServico" >
+								<p:commandButton styleClass="btn btn-danger" disabled="#{prestadorPessoaMB.editar eq false and prestadorPessoaMB.novo eq false}" icon="fa fa-remove" action="#{prestadorPessoaMB.removerTipoServico}" immediate="true" update=":prestadores:tipoServico" >
 								<f:setPropertyActionListener value="#{tipo}" target="#{prestadorPessoaMB.tipoServico}"></f:setPropertyActionListener>
 								</p:commandButton>
 								
