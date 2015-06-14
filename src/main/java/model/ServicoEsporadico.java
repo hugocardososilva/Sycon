@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 public class ServicoEsporadico extends Servico{
 	@ManyToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private Prestador prestador; 
+	@ManyToOne(cascade= CascadeType.ALL, fetch=FetchType.LAZY)
+	private Lote lote;
 	
 	public ServicoEsporadico() {
 		super();
@@ -20,6 +22,14 @@ public class ServicoEsporadico extends Servico{
 
 	public void setPrestador(Prestador prestador) {
 		this.prestador = prestador;
+	}
+
+	public Lote getLote() {
+		return lote;
+	}
+
+	public void setLote(Lote lote) {
+		this.lote = lote;
 	}
 
 	

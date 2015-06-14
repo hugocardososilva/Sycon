@@ -10,7 +10,7 @@
 	<ui:define name="divMain">
 		
 		<h:form id="movimentacaoPrestadorForm">
-		
+			<h3>Movimentação de Prestadores de Serviço</h3>
 			<p:panel >
 				<p:panelGrid columns="3">
 				<p:outputLabel for="senhaPrestadorServico" value="Senha:"/>
@@ -145,7 +145,7 @@
 										
 						</p:column>
 						<p:column colspan="3">
-							<p:inputText disabled="true" id="lotePrestador" value="Quadra: #{prestadorPessoaMB.prestador.lote.numero} Nº: #{prestadorPessoaMB.prestador.lote.numero} " style="width:100%" />
+							<p:inputText disabled="true" id="lotePrestador" value="Quadra: #{servicoPrestadorMB.prestador.lote.quadra} Nº: #{servicoPrestadorMB.prestador.lote.numero} " style="width:100%" />
 						</p:column>
 					</p:row>
 					
@@ -177,6 +177,30 @@
 				
 			
 			</p:panel>
+			<p:panel toggleable="true" header="Serviços em aberto" >
+			<p:dataTable id="dataTablePrestadores" value="#{servicoPrestadorMB.servicosEmAberto}" emptyMessage="Nenhum serviço em aberto"
+			rows="10" paginator="true" var="aberto">
+			<p:column headerText="Nome" filterBy="#{aberto.pessoa.nome}">
+				<h:outputText value="#{aberto.pessoa.nome}"/>
+			</p:column>
+			<p:column headerText="Horário de entrada">
+				<h:outputText value="#{aberto.horaEntrada}">
+					<f:convertDateTime type="time"/>
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Lote">
+				<h:outputText value="Quadra: #{aberto.pessoa.lote.quadra} Nº: #{aberto.pessoa.lote.numero}" />
+			</p:column>
+			<p:column headerText="Previsão de saída">
+				<h:outputText value="#{aberto.pessoa.horaSaida}">
+				<f:convertDateTime type="time"></f:convertDateTime>
+				</h:outputText>
+			</p:column>
+			
+			</p:dataTable>
+		
+		
+		</p:panel>
 		
 		</h:form>
 		
